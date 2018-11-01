@@ -2,6 +2,7 @@
 #define HEDERA_ACCOUNT_ID_9999A0E8_2BD1_4C33_8071_D93A13B8A9E
 
 #include <stdint.h>
+#include "hedera-error.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -18,7 +19,7 @@ typedef struct {
     int64_t account;
 } HederaAccountId;
 
-extern HederaAccountId hedera_account_id_from_str(const char* s);
+extern HederaError hedera_account_id_from_str(const char* s, HederaAccountId* out);
 
 #ifdef __cplusplus
 }

@@ -2,6 +2,7 @@
 #define HEDERA_KEY_9999A0E8_2BD1_4C33_8071_D93A13B8A9E
 
 #include <stdint.h>
+#include "hedera-error.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -16,7 +17,10 @@ typedef struct { uint8_t bytes[32]; } HederaSecretKey;
 extern HederaSecretKey hedera_secret_key_generate();
 
 /// Parse a [HederaSecretKey] from a hex-encoded string.
-extern HederaSecretKey hedera_secret_key_from_str(const char* s);
+///
+/// Returns [HEDERA_ERROR_SUCCESS] (0) on success or any other value on error. Use [hedera_error_message] to retrieve
+/// a message for the error.
+extern HederaError hedera_secret_key_from_str(const char* s, HederaSecretKey* out);
 
 /// Format a [HederaSecretKey] as a hex-encoded string of the secret key encoded with a PKCS #8 wrapper (
 /// defined in RFC 5208).
