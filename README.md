@@ -9,8 +9,8 @@
 
 ## Install
 
-```go
-go get github.com/mehcode/hedera-sdk-go
+```sh
+$ go get github.com/mehcode/hedera-sdk-go
 ```
 
 ## License
