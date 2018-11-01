@@ -9,10 +9,16 @@ import (
 
 func main() {
 	// Read and decode the operator secret key
-	operatorSecret := hedera.SecretKeyFromString(os.Getenv("OPERATOR_SECRET"))
+	operatorSecret, err := hedera.SecretKeyFromString(os.Getenv("OPERATOR_SECRET"))
+	if err != nil {
+		panic(err)
+	}
 
 	// Read and decode target account
-	targetAccountId := hedera.AccountIDFromString(os.Getenv("TARGET"))
+	targetAccountId, err := hedera.AccountIDFromString(os.Getenv("TARGET"))
+	if err != nil {
+		panic(err)
+	}
 
 	//
 	// Connect to Hedera

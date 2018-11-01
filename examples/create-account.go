@@ -13,7 +13,10 @@ func main() {
 	//
 
 	// Read and decode the operator secret key
-	operatorSecret := hedera.SecretKeyFromString(os.Getenv("OPERATOR_SECRET"))
+	operatorSecret, err := hedera.SecretKeyFromString(os.Getenv("OPERATOR_SECRET"))
+	if err != nil {
+		panic(err)
+	}
 
 	// Generate a new keypair for the new account
 	secret := hedera.GenerateSecretKey()

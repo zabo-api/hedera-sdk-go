@@ -1,10 +1,13 @@
 package hedera
+
 import "C"
 
 // #include <stdlib.h>
 // #include "hedera-key.h"
 import "C"
-import "unsafe"
+import (
+	"unsafe"
+)
 
 // An EdDSA secret key.
 type SecretKey struct {
@@ -17,8 +20,14 @@ func GenerateSecretKey() SecretKey {
 }
 
 // Parse a [HederaSecretKey] from a hex-encoded string.
-func SecretKeyFromString(s string) SecretKey {
-	return SecretKey{C.hedera_secret_key_from_str(C.CString(s))}
+func SecretKeyFromString(s string) (SecretKey, error) {
+	var key C.HederaSecretKey
+	err := C.hedera_secret_key_from_str(C.CString(s), &key)
+	if err != 0 {
+		return SecretKey{}, hederaError(err)
+	}
+
+	return SecretKey{key}, nil
 }
 
 // Format this [SecretKey] as a hex-encoded string of the secret key encoded with a PKCS #8 wrapper (

@@ -16,8 +16,7 @@ func NewTransactionID(accountID AccountID) TransactionID {
 }
 
 func (id TransactionID) c() C.HederaTransactionId {
-	p := (*C.HederaTransactionId)(unsafe.Pointer(&id))
-	return *p
+	return *(*C.HederaTransactionId)(unsafe.Pointer(&id))
 }
 
 func (id TransactionID) String() string {

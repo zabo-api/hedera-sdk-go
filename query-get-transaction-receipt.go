@@ -38,7 +38,8 @@ func (query QueryGetTransactionReceipt) Send() QueryGetTransactionReceiptRespons
 	receipt := TransactionReceipt{Status: uint8(cResponse.answer.status)}
 
 	if cResponse.answer.account_id != nil {
-		receipt.AccountID = accountIDFromC(*cResponse.answer.account_id)
+		accountID := accountIDFromC(*cResponse.answer.account_id)
+		receipt.AccountID = &accountID
 	}
 
 	return QueryGetTransactionReceiptResponse{

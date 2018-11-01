@@ -2,6 +2,9 @@ package hedera
 
 // #include "hedera-account-id.h"
 import "C"
+import (
+	"unsafe"
+)
 
 type AccountID struct {
 	Realm   int64 `json:"realm"`
@@ -13,22 +16,20 @@ func NewAccountID(realm, shard, account int64) AccountID {
 	return AccountID{Realm: realm, Shard: shard, Account: account}
 }
 
-func AccountIDFromString(s string) AccountID {
-	return *accountIDFromC(C.hedera_account_id_from_str(C.CString(s)))
+func AccountIDFromString(s string) (AccountID, error) {
+	var accountID C.HederaAccountId
+	err := C.hedera_account_id_from_str(C.CString(s), &accountID)
+	if err != 0 {
+		return AccountID{}, hederaError(err)
+	}
+
+	return accountIDFromC(accountID), nil
 }
 
-func accountIDFromC(id C.HederaAccountId) *AccountID {
-	return &AccountID{
-		Realm:   int64(id.realm),
-		Shard:   int64(id.shard),
-		Account: int64(id.account),
-	}
+func accountIDFromC(id C.HederaAccountId) AccountID {
+	return *((*AccountID)(unsafe.Pointer(&id)))
 }
 
 func (id AccountID) c() C.HederaAccountId {
-	return C.HederaAccountId{
-		realm:   C.int64_t(id.Realm),
-		shard:   C.int64_t(id.Shard),
-		account: C.int64_t(id.Account),
-	}
+	return *(*C.HederaAccountId)(unsafe.Pointer(&id))
 }
