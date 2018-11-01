@@ -7,10 +7,10 @@
 
  * [Git LFS](https://git-lfs.github.com) 
 
-## Usage
+## Install
 
 ```go
-import "github.com/mehcode/hedera-sdk-go"
+go get github.com/mehcode/hedera-sdk-go
 ```
 
 ## License
