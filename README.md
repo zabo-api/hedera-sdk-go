@@ -5,7 +5,21 @@
 
  * Go 1.11+
 
- * [Git LFS](https://git-lfs.github.com) 
+ * [Git LFS](https://git-lfs.github.com) – Git LFS is used to version the built libraries in [`./libs`](./libs) (built from `hedera-sdk-rust`). This must be installed on your system prior to `go get`.
+ 
+    - MacOS (homebrew)
+    
+        ```sh
+        $ brew install git-lfs
+        $ git lfs install
+        ```
+ 
+    - Ubuntu / Debian
+        
+        ```sh
+        $ sudo apt install git-lfs
+        $ git lfs install
+        ```
 
 ## Install
 
