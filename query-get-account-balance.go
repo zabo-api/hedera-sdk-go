@@ -13,7 +13,7 @@ func newQueryGetAccountBalance(client *Client, account AccountID) QueryGetAccoun
 }
 
 func (query QueryGetAccountBalance) Cost() (uint64, error) {
-	var cost C.ulonglong
+	var cost C.uint64_t
 	err := C.hedera_query__get_account_balance__cost(query.inner, &cost)
 	if err != 0 {
 		return 0, hederaError(err)
@@ -23,7 +23,7 @@ func (query QueryGetAccountBalance) Cost() (uint64, error) {
 }
 
 func (query QueryGetAccountBalance) Answer() (uint64, error) {
-	var answer C.ulonglong
+	var answer C.uint64_t
 	err := C.hedera_query__get_account_balance__answer(query.inner, &answer)
 	if err != 0 {
 		return 0, hederaError(err)

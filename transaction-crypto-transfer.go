@@ -34,7 +34,7 @@ func (tx TransactionCryptoTransfer) Sign(key SecretKey) TransactionCryptoTransfe
 }
 
 func (tx TransactionCryptoTransfer) Transfer(id AccountID, amount int64) TransactionCryptoTransfer {
-	C.hedera_transaction__crypto_transfer__add_transfer(tx.inner, id.c(), C.longlong(amount))
+	C.hedera_transaction__crypto_transfer__add_transfer(tx.inner, id.c(), C.int64_t(amount))
 	return tx
 }
 

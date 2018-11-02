@@ -39,7 +39,7 @@ func (tx TransactionCreateAccount) Key(public PublicKey) TransactionCreateAccoun
 }
 
 func (tx TransactionCreateAccount) InitialBalance(balance uint64) TransactionCreateAccount {
-	C.hedera_transaction__create_account__set_initial_balance(tx.inner, C.ulonglong(balance))
+	C.hedera_transaction__create_account__set_initial_balance(tx.inner, C.uint64_t(balance))
 	return tx
 }
 

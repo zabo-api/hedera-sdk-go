@@ -21,7 +21,7 @@ func newQueryGetTransactionReceipt(client *Client, transactionID TransactionID) 
 }
 
 func (query QueryGetTransactionReceipt) Cost() (uint64, error) {
-	var cost C.ulonglong
+	var cost C.uint64_t
 	err := C.hedera_query__get_transaction_receipt__cost(query.inner, &cost)
 	if err != 0 {
 		return 0, hederaError(err)
