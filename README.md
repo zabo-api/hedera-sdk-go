@@ -20,6 +20,14 @@
         $ sudo apt install git-lfs
         $ git lfs install
         ```
+        
+    - Windows
+        
+        Download and run [git-lfs.exe](https://github.com/git-lfs/git-lfs/releases/download/v2.6.0/git-lfs-windows-v2.6.0.exe). Open your git console ( under `Git Bash` if you installed Git through https://git-scm.com/ ).
+        
+        ```sh
+        $ git lfs install
+        ```
 
 ## Install
 
