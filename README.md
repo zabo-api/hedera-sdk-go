@@ -16,7 +16,7 @@ $ go get github.com/mehcode/hedera-sdk-go
 ## License
 
 Licensed under Apache License, 
-Version 2.0 ([LICENSE-APACHE](LICENSE-APACHE) or http://www.apache.org/licenses/LICENSE-2.0).
+Version 2.0 ([LICENSE](LICENSE) or http://www.apache.org/licenses/LICENSE-2.0).
 
 ## Contribution
 
