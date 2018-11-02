@@ -9,5 +9,4 @@ type Transaction struct {
 
 type TransactionResponse struct {
 	ID TransactionID
-	Precheck uint8
 }

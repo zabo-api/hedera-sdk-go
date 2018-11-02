@@ -11,7 +11,7 @@ type Timestamp struct {
 	padding [4]byte
 }
 
-func NewTimestamp() Timestamp {
-	response := C.hedera_timestamp_new()
+func Now() Timestamp {
+	response := C.hedera_timestamp_now()
 	return *((*Timestamp)(unsafe.Pointer(&response)))
 }

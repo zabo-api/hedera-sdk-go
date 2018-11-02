@@ -32,8 +32,12 @@ func main() {
 	// Get balance for target account
 	//
 
-	balance := client.GetAccountBalance(targetAccountId).Send()
-	fmt.Printf("account balance = %v\n", balance.Balance)
+	balance, err := client.GetAccountBalance(targetAccountId).Answer()
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Printf("account balance = %v\n", balance)
 
 	//
 	// Transfer 100 cryptos to target
@@ -41,7 +45,7 @@ func main() {
 
 	nodeAccountId := hedera.NewAccountID(0, 0, 3)
 	operatorAccountID := hedera.NewAccountID(0, 0, 2)
-	response := client.CryptoTransfer().
+	response, err := client.CryptoTransfer().
 		Operator(operatorAccountID).
 		Node(nodeAccountId).
 		Memo("[test] hedera-sdk-go v2").
@@ -53,6 +57,10 @@ func main() {
 		Sign(operatorSecret). // And again as sender
 		Execute()
 
+	if err != nil {
+		panic(err)
+	}
+
 	transactionID := response.ID
 	fmt.Printf("transferred; transaction = %v\n", transactionID)
 
@@ -63,11 +71,9 @@ func main() {
 	fmt.Printf("wait for 2s...\n")
 	time.Sleep(2 * time.Second)
 
-	receiptResponse := client.GetTransactionReceipt(transactionID).Send()
-
-	if receiptResponse.Precheck != 0 {
-		fmt.Printf("receiptResponse:pre-check != OK (%v)\n", receiptResponse.Precheck)
-		return
+	_, err = client.GetTransactionReceipt(transactionID).Answer()
+	if err != nil {
+		panic(err)
 	}
 
 	fmt.Printf("wait for 2s...\n")
@@ -77,10 +83,10 @@ func main() {
 	// Get balance for target account (again)
 	//
 
-	balance = client.GetAccountBalance(targetAccountId).Send()
-	if balance.Precheck != 0 {
-		panic(fmt.Sprintf("balance:pre-check != OK (%v)", balance.Precheck))
+	balance, err = client.GetAccountBalance(targetAccountId).Answer()
+	if err != nil {
+		panic(err)
 	}
 
-	fmt.Printf("account balance = %v\n", balance.Balance)
+	fmt.Printf("account balance = %v\n", balance)
 }

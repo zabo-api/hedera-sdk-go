@@ -43,7 +43,9 @@ func (tx TransactionCreateAccount) InitialBalance(balance uint64) TransactionCre
 	return tx
 }
 
-func (tx TransactionCreateAccount) Execute() TransactionResponse {
-	response := C.hedera_transaction__create_account__execute(tx.inner)
-	return *((*TransactionResponse)(unsafe.Pointer(&response)))
+func (tx TransactionCreateAccount) Execute() (TransactionResponse, error) {
+	var res C.HederaTransactionResponse
+	err := C.hedera_transaction__create_account__execute(tx.inner, &res)
+
+	return *((*TransactionResponse)(unsafe.Pointer(&res))), hederaError(err)
 }

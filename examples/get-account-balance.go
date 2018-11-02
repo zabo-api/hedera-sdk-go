@@ -10,12 +10,10 @@ func main() {
 	defer client.Close()
 
 	accountID := hedera.NewAccountID(0, 0, 2)
+	balance, err := client.GetAccountBalance(accountID).Answer()
+	if err != nil {
+		panic(err)
+	}
 
-	// TODO: Allow strings to be passed for account ID here
-	// TODO: Remove [.Kind(..)] and replace with [.Answer()] and [.Cost()]
-	// balance := client.GetAccountBalance(accountID).Answer()
-	response := client.GetAccountBalance(accountID).Send()
-
-	// fmt.Printf("balance = %v\n", balance)
-	fmt.Printf("balance = %v\n", response.Balance)
+	fmt.Printf("balance = %v\n", balance)
 }

@@ -38,7 +38,9 @@ func (tx TransactionCryptoTransfer) Transfer(id AccountID, amount int64) Transac
 	return tx
 }
 
-func (tx TransactionCryptoTransfer) Execute() TransactionResponse {
-	response := C.hedera_transaction__crypto_transfer__execute(tx.inner)
-	return *((*TransactionResponse)(unsafe.Pointer(&response)))
+func (tx TransactionCryptoTransfer) Execute() (TransactionResponse, error) {
+	var res C.HederaTransactionResponse
+	err := C.hedera_transaction__crypto_transfer__execute(tx.inner, &res)
+
+	return *((*TransactionResponse)(unsafe.Pointer(&res))), hederaError(err)
 }

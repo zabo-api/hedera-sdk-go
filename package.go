@@ -12,6 +12,10 @@ import (
 )
 
 func hederaError(err C.longlong) error {
+	if err == 0 {
+		return nil
+	}
+
 	messageBytes := C.hedera_error_message(err)
 	defer C.free(unsafe.Pointer(messageBytes))
 

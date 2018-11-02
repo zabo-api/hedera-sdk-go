@@ -39,7 +39,7 @@ func main() {
 
 	nodeAccountId := hedera.NewAccountID(0, 0, 3)
 	operatorAccountID := hedera.NewAccountID(0, 0, 2)
-	response := client.CreateAccount().
+	response, err := client.CreateAccount().
 		Operator(operatorAccountID).
 		Node(nodeAccountId).
 		Key(public).
@@ -47,6 +47,10 @@ func main() {
 		Memo("[test] hedera-sdk-go v2").
 		Sign(operatorSecret).
 		Execute()
+
+	if err != nil {
+		panic(err)
+	}
 
 	transactionID := response.ID
 	fmt.Printf("created account; transaction = %v\n", transactionID)
@@ -58,15 +62,10 @@ func main() {
 	fmt.Printf("wait for 2s...\n")
 	time.Sleep(2 * time.Second)
 
-	receiptResponse := client.GetTransactionReceipt(transactionID).Send()
-
-	if receiptResponse.Precheck != 0 {
-		fmt.Printf("receiptResponse:pre-check != OK (%v)\n", receiptResponse.Precheck)
-		return
+	receipt, err := client.GetTransactionReceipt(transactionID).Answer()
+	if err != nil {
+		panic(err)
 	}
 
-	if receiptResponse.Receipt.AccountID != nil {
-		// TODO: Add pretty printing for account ID
-		fmt.Printf("account = %v\n", *receiptResponse.Receipt.AccountID)
-	}
+	fmt.Printf("account = %v\n", *receipt.AccountID)
 }
