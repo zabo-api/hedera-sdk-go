@@ -1,6 +1,7 @@
 #ifndef HEDERA_TRANSACTION_9999A0E8_2BD1_4C33_8071_D93A13B8A9E
 #define HEDERA_TRANSACTION_9999A0E8_2BD1_4C33_8071_D93A13B8A9E
 
+#include "hedera-error.h"
 #include "hedera-key.h"
 #include "hedera-client.h"
 #include "hedera-account-id.h"
@@ -14,7 +15,6 @@ typedef struct HederaTransaction HederaTransaction;
 
 typedef struct {
     HederaTransactionId id;
-    HederaPrecheckCode precheck;
 } HederaTransactionResponse;
 
 extern void hedera_transaction_set_operator(HederaTransaction*, HederaAccountId operator_);

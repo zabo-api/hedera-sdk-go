@@ -12,7 +12,7 @@ typedef struct {
     int32_t nanos;
 } HederaTimestamp;
 
-extern HederaTimestamp hedera_timestamp_new();
+extern HederaTimestamp hedera_timestamp_now();
 
 #ifdef __cplusplus
 }
