@@ -1,1 +1,1 @@
-module github.com/mehcode/hedera-sdk-go
+module github.com/hashgraph/hedera-sdk-go

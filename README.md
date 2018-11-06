@@ -32,7 +32,7 @@
 ## Install
 
 ```sh
-$ go get github.com/mehcode/hedera-sdk-go
+$ go get github.com/hashgraph/hedera-sdk-go
 ```
 
 ## License

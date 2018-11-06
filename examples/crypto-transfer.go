@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/mehcode/hedera-sdk-go"
+	"github.com/hashgraph/hedera-sdk-go"
 	"os"
 	"time"
 )
