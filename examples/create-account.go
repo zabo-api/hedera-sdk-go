@@ -37,13 +37,13 @@ func main() {
 	// Send transaction to create account
 	//
 
-	nodeAccountId := hedera.NewAccountID(0, 0, 3)
-	operatorAccountID := hedera.NewAccountID(0, 0, 2)
+	nodeAccountId := hedera.AccountID{Account: 3}
+	operatorAccountID := hedera.AccountID{Account: 2}
 	response, err := client.CreateAccount().
-		Operator(operatorAccountID).
-		Node(nodeAccountId).
 		Key(public).
 		InitialBalance(0).
+		Operator(operatorAccountID).
+		Node(nodeAccountId).
 		Memo("[test] hedera-sdk-go v2").
 		Sign(operatorSecret).
 		Execute()

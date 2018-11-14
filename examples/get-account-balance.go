@@ -3,17 +3,31 @@ package main
 import (
 	"fmt"
 	"github.com/hashgraph/hedera-sdk-go"
+	"time"
 )
 
 func main() {
 	client := hedera.Dial("testnet.hedera.com:50001")
 	defer client.Close()
 
-	accountID := hedera.NewAccountID(0, 0, 2)
+	// Target account to get the balance for
+	accountID := hedera.AccountID{Account: 2}
+
+	// Get the _cost_ or transaction fee for the query of getting the account balance
+	cost, err := client.GetAccountBalance(accountID).Cost()
+	if err != nil {
+		panic(err)
+	}
+
+	// Wait 1s between queries (testnet transaction limitation)
+	time.Sleep(1 * time.Second)
+
+	// Get the _answer_ for the query of getting the account balance
 	balance, err := client.GetAccountBalance(accountID).Answer()
 	if err != nil {
 		panic(err)
 	}
 
+	fmt.Printf("cost    = %v\n", cost)
 	fmt.Printf("balance = %v\n", balance)
 }

@@ -4,7 +4,7 @@ package hedera
 import "C"
 
 type QueryGetTransactionReceipt struct {
-	inner *C.HederaQuery
+	Query
 }
 
 type TransactionReceipt struct {
@@ -17,17 +17,7 @@ type TransactionReceipt struct {
 
 func newQueryGetTransactionReceipt(client *Client, transactionID TransactionID) QueryGetTransactionReceipt {
 	return QueryGetTransactionReceipt{
-		C.hedera_query__get_transaction_receipt__new(client.inner, transactionID.c())}
-}
-
-func (query QueryGetTransactionReceipt) Cost() (uint64, error) {
-	var cost C.uint64_t
-	err := C.hedera_query__get_transaction_receipt__cost(query.inner, &cost)
-	if err != 0 {
-		return 0, hederaError(err)
-	}
-
-	return uint64(cost), nil
+		Query{C.hedera_query__get_transaction_receipt__new(client.inner, transactionID.c())}}
 }
 
 func (query QueryGetTransactionReceipt) Answer() (TransactionReceipt, error) {

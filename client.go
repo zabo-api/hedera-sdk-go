@@ -15,8 +15,9 @@ func (client *Client) Close() {
 	C.hedera_client_close(client.inner)
 }
 
+//
 // Query
-// ----------------------------------------------------------------------------
+//
 
 func (client *Client) GetAccountBalance(id AccountID) QueryGetAccountBalance {
 	return newQueryGetAccountBalance(client, id)
@@ -26,8 +27,9 @@ func (client *Client) GetTransactionReceipt(id TransactionID) QueryGetTransactio
 	return newQueryGetTransactionReceipt(client, id)
 }
 
+//
 // Transaction
-// ----------------------------------------------------------------------------
+//
 
 func (client *Client) CreateAccount() TransactionCreateAccount {
 	return newTransactionCreateAccount(client)

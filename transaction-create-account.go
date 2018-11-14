@@ -2,7 +2,6 @@ package hedera
 
 // #include "hedera-transaction-create-account.h"
 import "C"
-import "unsafe"
 
 type TransactionCreateAccount struct {
 	Transaction
@@ -11,26 +10,6 @@ type TransactionCreateAccount struct {
 func newTransactionCreateAccount(client *Client) TransactionCreateAccount {
 	return TransactionCreateAccount{Transaction{
 		C.hedera_transaction__create_account__new(client.inner)}}
-}
-
-func (tx TransactionCreateAccount) Operator(id AccountID) TransactionCreateAccount {
-	C.hedera_transaction_set_operator(tx.inner, id.c())
-	return tx
-}
-
-func (tx TransactionCreateAccount) Node(id AccountID) TransactionCreateAccount {
-	C.hedera_transaction_set_node(tx.inner, id.c())
-	return tx
-}
-
-func (tx TransactionCreateAccount) Memo(memo string) TransactionCreateAccount {
-	C.hedera_transaction_set_memo(tx.inner, C.CString(memo))
-	return tx
-}
-
-func (tx TransactionCreateAccount) Sign(key SecretKey) TransactionCreateAccount {
-	C.hedera_transaction_sign(tx.inner, key.inner)
-	return tx
 }
 
 func (tx TransactionCreateAccount) Key(public PublicKey) TransactionCreateAccount {
@@ -43,9 +22,22 @@ func (tx TransactionCreateAccount) InitialBalance(balance uint64) TransactionCre
 	return tx
 }
 
-func (tx TransactionCreateAccount) Execute() (TransactionResponse, error) {
-	var res C.HederaTransactionResponse
-	err := C.hedera_transaction__create_account__execute(tx.inner, &res)
+//
+// Inherited from Transaction
+//
 
-	return *((*TransactionResponse)(unsafe.Pointer(&res))), hederaError(err)
+func (tx TransactionCreateAccount) Operator(id AccountID) TransactionCreateAccount {
+	return TransactionCreateAccount{tx.Transaction.Operator(id)}
+}
+
+func (tx TransactionCreateAccount) Node(id AccountID) TransactionCreateAccount {
+	return TransactionCreateAccount{tx.Transaction.Node(id)}
+}
+
+func (tx TransactionCreateAccount) Memo(memo string) TransactionCreateAccount {
+	return TransactionCreateAccount{tx.Transaction.Memo(memo)}
+}
+
+func (tx TransactionCreateAccount) Sign(key SecretKey) TransactionCreateAccount {
+	return TransactionCreateAccount{tx.Transaction.Sign(key)}
 }

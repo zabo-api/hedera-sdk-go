@@ -43,16 +43,16 @@ func main() {
 	// Transfer 100 cryptos to target
 	//
 
-	nodeAccountId := hedera.NewAccountID(0, 0, 3)
-	operatorAccountID := hedera.NewAccountID(0, 0, 2)
+	nodeAccountId := hedera.AccountID{Account: 3}
+	operatorAccountID := hedera.AccountID{Account: 2}
 	response, err := client.CryptoTransfer().
-		Operator(operatorAccountID).
-		Node(nodeAccountId).
-		Memo("[test] hedera-sdk-go v2").
 		// Move 100 out of operator account
 		Transfer(operatorAccountID, -100).
 		// And place in our new account
 		Transfer(targetAccountId, 100).
+		Operator(operatorAccountID).
+		Node(nodeAccountId).
+		Memo("[test] hedera-sdk-go v2").
 		Sign(operatorSecret). // Sign it once as operator
 		Sign(operatorSecret). // And again as sender
 		Execute()

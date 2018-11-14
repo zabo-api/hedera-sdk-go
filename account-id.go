@@ -12,10 +12,8 @@ type AccountID struct {
 	Account int64 `json:"account"`
 }
 
-func NewAccountID(realm, shard, account int64) AccountID {
-	return AccountID{Realm: realm, Shard: shard, Account: account}
-}
-
+// Parse an account ID from the string.
+// Expects a string of the form: {realm}:{shard}:{account}
 func AccountIDFromString(s string) (AccountID, error) {
 	var accountID C.HederaAccountId
 	err := C.hedera_account_id_from_str(C.CString(s), &accountID)
@@ -26,10 +24,12 @@ func AccountIDFromString(s string) (AccountID, error) {
 	return accountIDFromC(accountID), nil
 }
 
+// Cast an [AccountId] from the C SDK
 func accountIDFromC(id C.HederaAccountId) AccountID {
 	return *((*AccountID)(unsafe.Pointer(&id)))
 }
 
+// Cast an [AccountId] to the C SDK
 func (id AccountID) c() C.HederaAccountId {
 	return *(*C.HederaAccountId)(unsafe.Pointer(&id))
 }
