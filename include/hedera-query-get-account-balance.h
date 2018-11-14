@@ -8,11 +8,11 @@
 extern "C" {
 #endif
 
+typedef uint64_t HederaQueryGetAccountBalanceAnswer;
+
 extern HederaQuery* hedera_query__get_account_balance__new(HederaClient*, HederaAccountId account);
 
-extern HederaError hedera_query__get_account_balance__answer(HederaQuery*, uint64_t*);
-
-extern HederaError hedera_query__get_account_balance__cost(HederaQuery*, uint64_t*);
+extern HederaError hedera_query__get_account_balance__answer(HederaQuery*, HederaQueryGetAccountBalanceAnswer*);
 
 #ifdef __cplusplus
 }

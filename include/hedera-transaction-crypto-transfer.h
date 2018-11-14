@@ -11,8 +11,6 @@ extern HederaTransaction* hedera_transaction__crypto_transfer__new(HederaClient*
 
 extern void hedera_transaction__crypto_transfer__add_transfer(HederaTransaction*, HederaAccountId id, int64_t amount);
 
-extern HederaError hedera_transaction__crypto_transfer__execute(HederaTransaction*, HederaTransactionResponse*);
-
 #ifdef __cplusplus
 }
 #endif

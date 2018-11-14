@@ -25,6 +25,8 @@ extern void hedera_transaction_set_memo(HederaTransaction*, const char* memo);
 
 extern void hedera_transaction_sign(HederaTransaction*, HederaSecretKey);
 
+extern HederaError hedera_transaction_execute(HederaTransaction*, HederaTransactionResponse*);
+
 #ifdef __cplusplus
 }
 #endif

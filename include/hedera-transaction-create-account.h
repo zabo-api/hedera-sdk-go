@@ -13,8 +13,6 @@ extern void hedera_transaction__create_account__set_initial_balance(HederaTransa
 
 extern void hedera_transaction__create_account__set_key(HederaTransaction*, HederaPublicKey key);
 
-extern HederaError hedera_transaction__create_account__execute(HederaTransaction*, HederaTransactionResponse*);
-
 #ifdef __cplusplus
 }
 #endif

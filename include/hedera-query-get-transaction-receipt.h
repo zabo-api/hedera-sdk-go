@@ -23,8 +23,6 @@ extern HederaQuery* hedera_query__get_transaction_receipt__new(
 
 extern HederaError hedera_query__get_transaction_receipt__answer(HederaQuery*, HederaQueryGetTransactionReceiptAnswer*);
 
-extern HederaError hedera_query__get_transaction_receipt__cost(HederaQuery*, uint64_t*);
-
 #ifdef __cplusplus
 }
 #endif
