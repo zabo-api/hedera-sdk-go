@@ -28,6 +28,7 @@ func main() {
 		panic(err)
 	}
 
-	fmt.Printf("cost    = %v\n", cost)
-	fmt.Printf("balance = %v\n", balance)
+	fmt.Printf("cost    = %v tinybars\n", cost)
+	fmt.Printf("balance = %v tinybars\n", balance)
+	fmt.Printf("balance = %.5f hbars\n", float64(balance) / 100000000.0)
 }
