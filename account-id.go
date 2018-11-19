@@ -3,6 +3,7 @@ package hedera
 // #include "hedera-account-id.h"
 import "C"
 import (
+	"github.com/markbates/oncer"
 	"unsafe"
 )
 
@@ -10,6 +11,14 @@ type AccountID struct {
 	Realm   int64 `json:"realm"`
 	Shard   int64 `json:"shard"`
 	Account int64 `json:"account"`
+}
+
+func NewAccountID(realm, shard, account int64) AccountID {
+	oncer.Deprecate(0,
+		"github.com/hashgraph/hedera-sdk-go#NewAccountID",
+		"Use github.com/hashgraph/hedera-sdk-go#AccountID instead.")
+
+	return AccountID{Realm: realm, Shard: shard, Account: account}
 }
 
 // Parse an account ID from the string.
