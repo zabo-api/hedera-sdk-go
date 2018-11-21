@@ -7,7 +7,11 @@ import (
 )
 
 func main() {
-	client := hedera.Dial("testnet.hedera.com:50001")
+	client, err := hedera.Dial("testnet.hedera.com:50001")
+	if err != nil {
+		panic(err)
+	}
+
 	defer client.Close()
 
 	// Target account to get the balance for
