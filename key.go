@@ -57,3 +57,14 @@ func (key PublicKey) String() string {
 
 	return C.GoString(bytes)
 }
+
+// Parse a [HederaPublicKey] from a hex-encoded string.
+func PublicKeyFromString(s string) (PublicKey, error) {
+	var key C.HederaPublicKey
+	err := C.hedera_public_key_from_str(C.CString(s), &key)
+	if err != 0 {
+		return PublicKey{}, hederaError(err)
+	}
+
+	return PublicKey{key}, nil
+}
