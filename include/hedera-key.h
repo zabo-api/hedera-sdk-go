@@ -40,6 +40,12 @@ extern HederaPublicKey hedera_public_key_from_secret_key(HederaSecretKey*);
 /// Returns ownership of the string. Must be freed with [free].
 extern char* hedera_public_key_to_str(HederaPublicKey*);
 
+/// Parse a [HederaPublicKey] from a hex-encoded string.
+///
+/// Returns [HEDERA_ERROR_SUCCESS] (0) on success or any other value on error. Use [hedera_error_message] to retrieve
+/// a message for the error.
+extern HederaError hedera_public_key_from_str(const char* s, HederaPublicKey* out);
+
 #ifdef __cplusplus
 }
 #endif
