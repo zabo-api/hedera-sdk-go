@@ -67,8 +67,12 @@ func main() {
 	time.Sleep(2 * time.Second)
 
 	receipt, err := client.GetTransactionReceipt(transactionID).Answer()
-	if err != nil || receipt.Status != hedera.TransactionStatusSuccess {
+	if err != nil {
 		panic(err)
+	}
+
+	if receipt.Status != hedera.TransactionStatusSuccess {
+		panic(fmt.Errorf("transaction has a non-successful status: %v", receipt.Status.String()))
 	}
 
 	fmt.Printf("account = %v\n", *receipt.AccountID)
