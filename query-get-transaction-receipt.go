@@ -7,22 +7,17 @@ type QueryGetTransactionReceipt struct {
 	Query
 }
 
-type TransactionReceipt struct {
-	Status    uint8
-	AccountID *AccountID
-	// unsupported: ContractID *C.HederaContractId
-	// unsupported: FileID *C.HederaFileId
-}
+type TransactionStatus uint8
 
 const (
-	TransactionStatus_UNKNOWN		uint8			= 0
-	TransactionStatus_SUCCESS 		uint8			= 1
-	TransactionStatus_FAIL_INVALID	uint8			= 2
-	TransactionStatus_FAIL_FEE		uint8			= 3
-	TransactionStatus_FAIL_BALANCE	uint8			= 4
+	TransactionStatusUnkown			TransactionStatus		= 0
+	TransactionStatusSuccess 		TransactionStatus		= 1
+	TransactionStatusFailInvalid	TransactionStatus		= 2
+	TransactionStatusFailFee		TransactionStatus		= 3
+	TransactionStatusFailBalance	TransactionStatus		= 4
 )
 
-var TransactionStatus_name = map[uint8]string{
+var transactionStatusText = map[TransactionStatus]string{
 	0: "UNKNOWN",
 	1: "SUCCESS",
 	2: "FAIL_INVALID",
@@ -30,14 +25,16 @@ var TransactionStatus_name = map[uint8]string{
 	4: "FAIL_BALANCE",
 }
 
-var TransactionStatus_value = map[string]uint8{
-	"UNKNOWN":      0,
-	"SUCCESS":      1,
-	"FAIL_INVALID": 2,
-	"FAIL_FEE":     3,
-	"FAIL_BALANCE": 4,
+type TransactionReceipt struct {
+	Status    TransactionStatus
+	AccountID *AccountID
+	// unsupported: ContractID *C.HederaContractId
+	// unsupported: FileID *C.HederaFileId
 }
 
+func (status TransactionStatus) String() string {
+	return transactionStatusText[status]
+}
 
 func newQueryGetTransactionReceipt(client *Client, transactionID TransactionID) QueryGetTransactionReceipt {
 	return QueryGetTransactionReceipt{
@@ -51,7 +48,7 @@ func (query QueryGetTransactionReceipt) Answer() (TransactionReceipt, error) {
 		return TransactionReceipt{}, hederaError(err)
 	}
 
-	receipt := TransactionReceipt{Status: uint8(answer.status)}
+	receipt := TransactionReceipt{Status: TransactionStatus(answer.status)}
 
 	if answer.account_id != nil {
 		accountID := accountIDFromC(*answer.account_id)

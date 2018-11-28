@@ -67,7 +67,7 @@ func main() {
 	time.Sleep(2 * time.Second)
 
 	receipt, err := client.GetTransactionReceipt(transactionID).Answer()
-	if err != nil || receipt.Status != hedera.TransactionStatus_SUCCESS {
+	if err != nil || receipt.Status != hedera.TransactionStatusSuccess {
 		panic(err)
 	}
 
