@@ -75,8 +75,8 @@ func main() {
 	fmt.Printf("wait for 2s...\n")
 	time.Sleep(2 * time.Second)
 
-	_, err = client.GetTransactionReceipt(transactionID).Answer()
-	if err != nil {
+	receipt, err := client.GetTransactionReceipt(transactionID).Answer()
+	if err != nil || receipt.Status != hedera.TransactionStatus_SUCCESS {
 		panic(err)
 	}
 

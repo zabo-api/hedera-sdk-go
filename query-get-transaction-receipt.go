@@ -8,12 +8,36 @@ type QueryGetTransactionReceipt struct {
 }
 
 type TransactionReceipt struct {
-	// TODO: Make enum for [Status]
 	Status    uint8
 	AccountID *AccountID
 	// unsupported: ContractID *C.HederaContractId
 	// unsupported: FileID *C.HederaFileId
 }
+
+const (
+	TransactionStatus_UNKNOWN		uint8			= 0
+	TransactionStatus_SUCCESS 		uint8			= 1
+	TransactionStatus_FAIL_INVALID	uint8			= 2
+	TransactionStatus_FAIL_FEE		uint8			= 3
+	TransactionStatus_FAIL_BALANCE	uint8			= 4
+)
+
+var TransactionStatus_name = map[uint8]string{
+	0: "UNKNOWN",
+	1: "SUCCESS",
+	2: "FAIL_INVALID",
+	3: "FAIL_FEE",
+	4: "FAIL_BALANCE",
+}
+
+var TransactionStatus_value = map[string]uint8{
+	"UNKNOWN":      0,
+	"SUCCESS":      1,
+	"FAIL_INVALID": 2,
+	"FAIL_FEE":     3,
+	"FAIL_BALANCE": 4,
+}
+
 
 func newQueryGetTransactionReceipt(client *Client, transactionID TransactionID) QueryGetTransactionReceipt {
 	return QueryGetTransactionReceipt{
