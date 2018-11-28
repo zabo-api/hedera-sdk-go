@@ -26,3 +26,14 @@ func (id TransactionID) String() string {
 
 	return C.GoString(bytes)
 }
+
+func TransactionIDFromString(s string) (TransactionID, error) {
+	var transactionID C.HederaTransactionId
+	err := C.hedera_transaction_id_from_str(C.CString(s), &transactionID)
+	if err != 0 {
+		return TransactionID{}, hederaError(err)
+	}
+
+	return *((*TransactionID)(unsafe.Pointer(&transactionID))), nil
+}
+
