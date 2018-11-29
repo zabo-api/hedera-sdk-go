@@ -10,11 +10,23 @@ extern "C" {
 
 // TODO: Define a Keypair structure. Would be more efficient for signing.
 
-/// An EdDSA secret key.
-typedef struct { uint8_t bytes[32]; } HederaSecretKey;
-
 /// A signature signed with a HederaSecretKey.
 typedef struct { uint8_t bytes[64]; } HederaSignature;
+
+/// Parse a [HederaSignature] from a hex-encoded string.
+///
+/// Returns [HEDERA_ERROR_SUCCESS] (0) on success or any other value on error. Use [hedera_error_message] to retrieve
+/// a message for the error.
+extern HederaError hedera_signature_from_str(const char* s, HederaSignature* out);
+
+/// Format a [HederaSignature as a hex-encoded string of the signature.
+///
+///
+/// Returns ownership of the string. Must be freed with [free].
+extern char* hedera_secret_key_to_str(HederaSignature*);
+
+/// An EdDSA secret key.
+typedef struct { uint8_t bytes[32]; } HederaSecretKey;
 
 /// Generate a new [HederaSecretKey] from a cryptographically secure pseudo-random number generator (CSPRNG).
 extern HederaSecretKey hedera_secret_key_generate();
