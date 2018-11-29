@@ -2,7 +2,6 @@ package hedera
 
 // #include "hedera-transaction.h"
 import "C"
-import "unsafe"
 
 type Transaction struct {
 	inner *C.HederaTransaction
@@ -36,5 +35,9 @@ func (tx Transaction) Execute() (TransactionResponse, error) {
 	var res C.HederaTransactionResponse
 	err := C.hedera_transaction_execute(tx.inner, &res)
 
-	return *((*TransactionResponse)(unsafe.Pointer(&res))), hederaError(err)
+	if err != 0 {
+		return TransactionResponse{}, hederaError(err)
+	}
+
+	return TransactionResponse{ID: transactionIDFromC(res.id)}, nil
 }
