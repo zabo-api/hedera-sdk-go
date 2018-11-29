@@ -45,7 +45,7 @@ func (key SecretKey) String() string {
 }
 
 // Sign a message with this [SecretKey]
-func(key SecretKey) Sign(message []byte) (Signature, error) {
+func (key SecretKey) Sign(message []byte) (Signature, error) {
 	ptr := C.CBytes(message)
 	defer C.free(unsafe.Pointer(ptr))
 
@@ -80,7 +80,7 @@ func (key PublicKey) String() string {
 
 // verify a message and it's [Signature] are were signed by the [SecretKey] associated with
 // this [PublicKey]
-func(key PublicKey) Verify(message []byte, signature Signature) bool {
+func (key PublicKey) Verify(message []byte, signature Signature) bool {
 	ptr := C.CBytes(message)
 	defer C.free(unsafe.Pointer(ptr))
 
