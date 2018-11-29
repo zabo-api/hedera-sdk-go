@@ -10,11 +10,11 @@ type QueryGetTransactionReceipt struct {
 type TransactionStatus uint8
 
 const (
-	TransactionStatusUnkown			TransactionStatus		= 0
-	TransactionStatusSuccess 		TransactionStatus		= 1
-	TransactionStatusFailInvalid	TransactionStatus		= 2
-	TransactionStatusFailFee		TransactionStatus		= 3
-	TransactionStatusFailBalance	TransactionStatus		= 4
+	TransactionStatusUnkown      TransactionStatus = 0
+	TransactionStatusSuccess     TransactionStatus = 1
+	TransactionStatusFailInvalid TransactionStatus = 2
+	TransactionStatusFailFee     TransactionStatus = 3
+	TransactionStatusFailBalance TransactionStatus = 4
 )
 
 var transactionStatusText = map[TransactionStatus]string{
