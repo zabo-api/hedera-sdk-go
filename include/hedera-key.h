@@ -23,7 +23,7 @@ extern HederaError hedera_signature_from_str(const char* s, HederaSignature* out
 ///
 ///
 /// Returns ownership of the string. Must be freed with [free].
-extern char* hedera_secret_key_to_str(HederaSignature*);
+extern char* hedera_signature_to_str(HederaSignature*);
 
 /// An EdDSA secret key.
 typedef struct { uint8_t bytes[32]; } HederaSecretKey;
