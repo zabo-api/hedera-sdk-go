@@ -15,7 +15,7 @@ typedef struct {
 
 extern HederaTransactionId hedera_transaction_id_new(HederaAccountId account);
 
-extern char* hedera_transaction_id_to_str(HederaTransactionId*);
+extern char* hedera_transaction_id_to_str(HederaTransactionId);
 
 /// Parse a [HederaTransactionID] from a string.
 ///
