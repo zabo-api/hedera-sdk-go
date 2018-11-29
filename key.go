@@ -14,6 +14,11 @@ type SecretKey struct {
 	inner C.HederaSecretKey
 }
 
+// A Signature signed by a Secret Key
+type Signature struct {
+	inner C.HederaSignature
+}
+
 // Generate a new [SecretKey] from a cryptographically secure pseudo-random number generator (CSPRNG).
 func GenerateSecretKey() SecretKey {
 	return SecretKey{C.hedera_secret_key_generate()}
@@ -39,6 +44,21 @@ func (key SecretKey) String() string {
 	return C.GoString(bytes)
 }
 
+// Sign a message with this [SecretKey]
+func (key SecretKey) Sign(message []byte) (Signature, error) {
+	ptr := C.CBytes(message)
+	defer C.free(unsafe.Pointer(ptr))
+
+	var signature C.HederaSignature
+	err := C.hedera_secret_key_sign(&key.inner, (*C.uint8_t)(ptr), C.size_t(len(message)), &signature)
+
+	if err != 0 {
+		return Signature{}, hederaError(err)
+	}
+
+	return Signature{signature}, nil
+}
+
 // Derive a [PublicKey] from this [SecretKey].
 func (key SecretKey) Public() PublicKey {
 	return PublicKey{C.hedera_public_key_from_secret_key(&key.inner)}
@@ -56,6 +76,17 @@ func (key PublicKey) String() string {
 	defer C.free(unsafe.Pointer(bytes))
 
 	return C.GoString(bytes)
+}
+
+// verify a message and it's [Signature] are were signed by the [SecretKey] associated with
+// this [PublicKey]
+func (key PublicKey) Verify(message []byte, signature Signature) bool {
+	ptr := C.CBytes(message)
+	defer C.free(unsafe.Pointer(ptr))
+
+	verified := C.hedera_public_key_verify(&key.inner, &signature.inner, (*C.uint8_t)(ptr), C.size_t(len(message)))
+
+	return verified != 0
 }
 
 // Parse a [HederaPublicKey] from a hex-encoded string.
