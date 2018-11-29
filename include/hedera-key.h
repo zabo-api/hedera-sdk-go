@@ -69,9 +69,9 @@ extern HederaError hedera_public_key_from_str(const char* s, HederaPublicKey* ou
 
 /// Verify a message using a [HederaSignature] and the corresponding [HederaPublicKey].
 ///
-///
-/// Returns 1 if verification passed, otherwise returns 0
-extern int8_t hedera_public_key_verify(HederaPublicKey* p, HederaSignature* s, const uint8_t* message, size_t message_len);
+/// Returns [HEDERA_ERROR_SUCCESS] (0) on success or any other value on error. Use [hedera_error_message] to retrieve
+/// a message for the error.
+extern HederaError hedera_public_key_verify(HederaPublicKey* p, HederaSignature* s, const uint8_t* message, size_t message_len, int8_t* out);
 
 #ifdef __cplusplus
 }
