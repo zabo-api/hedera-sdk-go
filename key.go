@@ -46,10 +46,11 @@ func (key SecretKey) String() string {
 
 // Sign a message with this [SecretKey]
 func(key SecretKey) Sign(message []byte) (Signature, error) {
-	ptr := C.uchar(message[0])
+	ptr := C.CBytes(message)
+	defer C.free(unsafe.Pointer(ptr))
 
 	var signature C.HederaSignature
-	err := C.hedera_secret_key_sign(&key.inner, &ptr, C.size_t(len(message)), &signature)
+	err := C.hedera_secret_key_sign(&key.inner, (*C.uint8_t)(ptr), C.size_t(len(message)), &signature)
 
 	if err != 0 {
 		return Signature{}, hederaError(err)
@@ -79,16 +80,13 @@ func (key PublicKey) String() string {
 
 // verify a message and it's [Signature] are were signed by the [SecretKey] associated with
 // this [PublicKey]
-func(key PublicKey) verify(message []byte, signature Signature) bool {
-	ptr := C.uchar(message[0])
+func(key PublicKey) Verify(message []byte, signature Signature) bool {
+	ptr := C.CBytes(message)
+	defer C.free(unsafe.Pointer(ptr))
 
-	verified := C.hedera_public_key_verify(&key.inner, &signature.inner, &ptr, C.size_t(len(message)))
+	verified := C.hedera_public_key_verify(&key.inner, &signature.inner, (*C.uint8_t)(ptr), C.size_t(len(message)))
 
-	if verified != 0{
-		return true
-	}
-
-	return false
+	return verified != 0
 }
 
 // Parse a [HederaPublicKey] from a hex-encoded string.
