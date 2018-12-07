@@ -102,7 +102,7 @@ def build(release=False):
 
 def commit():
     sha = sh("git rev-parse --short HEAD", cwd="vendor/hedera-sdk-c", silent=True).decode().strip()
-    sh("git add ./libs ./include")
+    sh("git add ./vendor/hedera-sdk-c ./libs ./include")
 
     try:
         sh(f"git commit -m \"build libs/ and sync include/ from hedera-sdk-c#{sha}\"")
