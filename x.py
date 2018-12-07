@@ -105,7 +105,7 @@ def commit():
     sh("git add ./libs ./include")
 
     try:
-        sh("git commit -m sync libs/ and include/ from hedera-sdk-c#%s" % sha)
+        sh(f"git commit -m \"build libs/ and sync include/ from hedera-sdk-c#{sha}\"")
         sh("git push")
 
     except CalledProcessError:
