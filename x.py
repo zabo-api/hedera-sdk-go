@@ -29,7 +29,7 @@ def update_submodules():
     sh("git submodule foreach git fetch", silent=True)
 
     # Reset to upstream
-    sh("git submodule foreach git reset origin/HEAD", silent=True)
+    sh("git submodule foreach git reset --hard origin/HEAD", silent=True)
 
     # Update include/
     rmtree("include")
