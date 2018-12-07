@@ -100,11 +100,29 @@ def build(release=False):
         copy2(f"vendor/hedera-sdk-c/target/{target}/debug/{artifact[target]}", f"libs/{target}/")
 
 
+def commit():
+    sha = sh("git rev-parse --short HEAD", cwd="vendor/hedera-sdk-c", silent=True).decode().strip()
+    sh("git add ./libs ./include")
+
+    try:
+        sh("git commit -m sync libs/ and include/ from hedera-sdk-c#%s" % sha)
+        sh("git push")
+
+    except CalledProcessError:
+        # Commit likely failed because there was nothing to commit
+        pass
+
+
 parser = argparse.ArgumentParser()
 parser.add_argument(
     "-R", "--release", help="build in release mode", action="store_true")
+parser.add_argument(
+    "-C", "--commit", help="commit include/ and libs/", action="store_true")
 
 argv = parser.parse_args(sys.argv[1:])
 
 update_submodules()
 build(release=argv.release)
+
+if argv.commit and argv.release:
+    commit()
