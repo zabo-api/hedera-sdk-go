@@ -1,10 +1,9 @@
-#ifndef HEDERA_TRANSACTION_9999A0E8_2BD1_4C33_8071_D93A13B8A9E
-#define HEDERA_TRANSACTION_9999A0E8_2BD1_4C33_8071_D93A13B8A9E
+#pragma once
 
 #include "hedera-error.h"
-#include "hedera-key.h"
+#include "hedera-crypto.h"
 #include "hedera-client.h"
-#include "hedera-account-id.h"
+#include "hedera-id.h"
 #include "hedera-transaction-id.h"
 
 #ifdef __cplusplus
@@ -13,22 +12,16 @@ extern "C" {
 
 typedef struct HederaTransaction HederaTransaction;
 
-typedef struct {
-    HederaTransactionId id;
-} HederaTransactionResponse;
-
 extern void hedera_transaction_set_operator(HederaTransaction*, HederaAccountId operator_);
 
 extern void hedera_transaction_set_node(HederaTransaction*, HederaAccountId node);
 
 extern void hedera_transaction_set_memo(HederaTransaction*, const char* memo);
 
-extern void hedera_transaction_sign(HederaTransaction*, HederaSecretKey);
+extern void hedera_transaction_sign(HederaTransaction*, HederaSecretKey*);
 
-extern HederaError hedera_transaction_execute(HederaTransaction*, HederaTransactionResponse*);
+extern HederaError hedera_transaction_execute(HederaTransaction*, HederaTransactionId*);
 
 #ifdef __cplusplus
 }
 #endif
-
-#endif // HEDERA_TRANSACTION_9999A0E8_2BD1_4C33_8071_D93A13B8A9E

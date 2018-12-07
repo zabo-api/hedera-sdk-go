@@ -1,5 +1,4 @@
-#ifndef HEDERA_TIMESTAMP_9999A0E8_2BD1_4C33_8071_D93A13B8A9E
-#define HEDERA_TIMESTAMP_9999A0E8_2BD1_4C33_8071_D93A13B8A9E
+#pragma once
 
 #include <stdint.h>
 
@@ -17,5 +16,3 @@ extern HederaTimestamp hedera_timestamp_now();
 #ifdef __cplusplus
 }
 #endif
-
-#endif // HEDERA_TIMESTAMP_9999A0E8_2BD1_4C33_8071_D93A13B8A9E

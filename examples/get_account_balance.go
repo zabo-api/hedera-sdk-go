@@ -34,5 +34,5 @@ func main() {
 
 	fmt.Printf("cost    = %v tinybars\n", cost)
 	fmt.Printf("balance = %v tinybars\n", balance)
-	fmt.Printf("balance = %.5f hbars\n", float64(balance) / 100000000.0)
+	fmt.Printf("balance = %.5f hbars\n", float64(balance)/100000000.0)
 }

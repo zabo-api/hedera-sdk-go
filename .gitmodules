@@ -1,0 +1,3 @@
+[submodule "vendor/hedera-sdk-c"]
+	path = vendor/hedera-sdk-c
+	url = https://github.com/hashgraph/hedera-sdk-c

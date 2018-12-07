@@ -1,17 +1,18 @@
 package hedera
 
-// #include "hedera-query.h"
+// #include <stdlib.h>
+// #include "hedera.h"
 import "C"
 
-type Query struct {
+type query struct {
 	inner *C.HederaQuery
 }
 
-func (query Query) Cost() (uint64, error) {
+func (q query) Cost() (uint64, error) {
 	var cost C.uint64_t
-	err := C.hedera_query_cost(query.inner, &cost)
-	if err != 0 {
-		return 0, hederaError(err)
+	res := C.hedera_query_cost(q.inner, &cost)
+	if res != 0 {
+		return 0, hederaLastError()
 	}
 
 	return uint64(cost), nil

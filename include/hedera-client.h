@@ -1,7 +1,6 @@
-#ifndef HEDERA_CLIENT_9999A0E8_2BD1_4C33_8071_D93A13B8A9E
-#define HEDERA_CLIENT_9999A0E8_2BD1_4C33_8071_D93A13B8A9E
+#pragma  once
 
-#include "hedera-account-id.h"
+#include "hedera-id.h"
 #include "hedera-error.h"
 
 #ifdef __cplusplus
@@ -39,7 +38,7 @@ typedef struct HederaClient HederaClient;
 
 /// Establish a connection to a Hedera node.
 /// Must be closed with [hedera_client_close].
-extern HederaError hedera_client_dial(const char* address, HederaClient**);
+extern HederaError hedera_client_new(const char* address, HederaClient**);
 
 /// Close and releases resources for a [HederaClient].
 extern void hedera_client_close(HederaClient*);
@@ -47,5 +46,3 @@ extern void hedera_client_close(HederaClient*);
 #ifdef __cplusplus
 }
 #endif
-
-#endif // HEDERA_CLIENT_9999A0E8_2BD1_4C33_8071_D93A13B8A9E

@@ -6,20 +6,16 @@ package hedera
 // #cgo linux LDFLAGS: -L libs/x86_64-unknown-linux-musl
 // #cgo windows LDFLAGS: -L libs/x86_64-pc-windows-gnu -l ws2_32 -l iphlpapi -l dbghelp -l userenv
 // #include <stdlib.h>
-// #include "hedera-error.h"
+// #include "hedera.h"
 import "C"
-import (
-	"errors"
-	"unsafe"
-)
+import "unsafe"
+import "errors"
 
-func hederaError(err C.int64_t) error {
-	if err == 0 {
-		return nil
-	}
+func hederaLastError() error {
+	return errors.New(hederaString(C.hedera_last_error()))
+}
 
-	messageBytes := C.hedera_error_message(err)
-	defer C.free(unsafe.Pointer(messageBytes))
-
-	return errors.New(C.GoString(messageBytes))
+func hederaString(bytes *C.char) string {
+	defer C.free(unsafe.Pointer(bytes))
+	return C.GoString(bytes)
 }

@@ -1,5 +1,4 @@
-#ifndef HEDERA_TRANSACTION_CRYPTO_TRANSFER_9999A0E8_2BD1_4C33_8071_D93A13B8A9E
-#define HEDERA_TRANSACTION_CRYPTO_TRANSFER_9999A0E8_2BD1_4C33_8071_D93A13B8A9E
+#pragma once
 
 #include "hedera-transaction.h"
 
@@ -14,5 +13,3 @@ extern void hedera_transaction__crypto_transfer__add_transfer(HederaTransaction*
 #ifdef __cplusplus
 }
 #endif
-
-#endif // HEDERA_TRANSACTION_CRYPTO_TRANSFER_9999A0E8_2BD1_4C33_8071_D93A13B8A9E

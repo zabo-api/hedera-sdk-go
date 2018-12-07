@@ -1,7 +1,6 @@
-#ifndef HEDERA_QUERY_GET_TRANSACTION_RECEIPT_9999A0E8_2BD1_4C33_8071_D93A13B8A9E
-#define HEDERA_QUERY_GET_TRANSACTION_RECEIPT_9999A0E8_2BD1_4C33_8071_D93A13B8A9E
+#pragma once
 
-#include "hedera-account-id.h"
+#include "hedera-id.h"
 #include "hedera-transaction-id.h"
 #include "hedera-query.h"
 
@@ -10,21 +9,20 @@ extern "C" {
 #endif
 
 typedef struct {
+    // fixme: use enum here
     uint8_t status;
     HederaAccountId* account_id;
-    // unsupported: HederaContractId* contract_id;
-    // unsupported: HederaFileId* file_id;
-} HederaQueryGetTransactionReceiptAnswer;
+    HederaContractId* contract_id;
+    HederaFileId* file_id;
+} HederaTransactionReceipt;
 
 extern HederaQuery* hedera_query__get_transaction_receipt__new(
     HederaClient*,
     HederaTransactionId transaction_id
 );
 
-extern HederaError hedera_query__get_transaction_receipt__answer(HederaQuery*, HederaQueryGetTransactionReceiptAnswer*);
+extern HederaError hedera_query__get_transaction_receipt__get(HederaQuery*, HederaTransactionReceipt*);
 
 #ifdef __cplusplus
 }
 #endif
-
-#endif // HEDERA_QUERY_GET_TRANSACTION_RECEIPT_9999A0E8_2BD1_4C33_8071_D93A13B8A9E

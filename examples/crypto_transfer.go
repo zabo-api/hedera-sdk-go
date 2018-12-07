@@ -8,22 +8,17 @@ import (
 )
 
 func main() {
-	//
-	// Generate keys
-	//
-
 	// Read and decode the operator secret key
 	operatorSecret, err := hedera.SecretKeyFromString(os.Getenv("OPERATOR_SECRET"))
 	if err != nil {
 		panic(err)
 	}
 
-	// Generate a new keypair for the new account
-	secret := hedera.GenerateSecretKey()
-	public := secret.Public()
-
-	fmt.Printf("secret = %v\n", secret)
-	fmt.Printf("public = %v\n", public)
+	// Read and decode target account
+	targetAccountId, err := hedera.AccountIDFromString(os.Getenv("TARGET"))
+	if err != nil {
+		panic(err)
+	}
 
 	//
 	// Connect to Hedera
@@ -38,18 +33,32 @@ func main() {
 	defer client.Close()
 
 	//
-	// Send transaction to create account
+	// Get balance for target account
+	//
+
+	balance, err := client.GetAccountBalance(targetAccountId).Answer()
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Printf("account balance = %v\n", balance)
+
+	//
+	// Transfer 100 cryptos to target
 	//
 
 	nodeAccountId := hedera.AccountID{Account: 3}
 	operatorAccountID := hedera.AccountID{Account: 2}
-	response, err := client.CreateAccount().
-		Key(public).
-		InitialBalance(0).
+	response, err := client.CryptoTransfer().
+		// Move 100 out of operator account
+		Transfer(operatorAccountID, -100).
+		// And place in our new account
+		Transfer(targetAccountId, 100).
 		Operator(operatorAccountID).
 		Node(nodeAccountId).
 		Memo("[test] hedera-sdk-go v2").
-		Sign(operatorSecret).
+		Sign(operatorSecret). // Sign it once as operator
+		Sign(operatorSecret). // And again as sender
 		Execute()
 
 	if err != nil {
@@ -57,10 +66,10 @@ func main() {
 	}
 
 	transactionID := response.ID
-	fmt.Printf("created account; transaction = %v\n", transactionID)
+	fmt.Printf("transferred; transaction = %v\n", transactionID)
 
 	//
-	// Get receipt to prove we created it ok
+	// Get receipt to prove we sent ok
 	//
 
 	fmt.Printf("wait for 2s...\n")
@@ -75,5 +84,17 @@ func main() {
 		panic(fmt.Errorf("transaction has a non-successful status: %v", receipt.Status.String()))
 	}
 
-	fmt.Printf("account = %v\n", *receipt.AccountID)
+	fmt.Printf("wait for 2s...\n")
+	time.Sleep(2 * time.Second)
+
+	//
+	// Get balance for target account (again)
+	//
+
+	balance, err = client.GetAccountBalance(targetAccountId).Answer()
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Printf("account balance = %v\n", balance)
 }
