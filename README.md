@@ -37,27 +37,22 @@ $ go get github.com/hashgraph/hedera-sdk-go
 
 ## Development
 
-#### Requirements
+### Requirements
 
  * [rustup](https://rustup.rs/)
 
- * `musl`
+ * musl
 
-    - MacOS
+ * MinGW
 
-        ```sh
-        $ brew install FiloSottile/musl-cross/musl-cross
-        ```
+#### MacOS
 
- * `MinGW`
+```sh
+$ brew install FiloSottile/musl-cross/musl-cross
+$ brew install mingw-w64
+```
 
-    - MacOS
-
-        ```sh
-        $ brew install mingw-w64
-        ```
-
-#### Build
+### Build
 
 ```sh
 $ ./x.py
