@@ -87,6 +87,6 @@ type PartialTransactionMessage struct {
 	transaction TransactionID
 }
 
-func (m PartialTransactionMessage) Receipt() QueryGetTransactionReceipt {
-	return newQueryGetTransactionReceipt(m.client, m.transaction)
+func (m PartialTransactionMessage) Receipt() QueryTransactionGetReceipt {
+	return newQueryTransactionGetReceipt(m.client, m.transaction)
 }

@@ -4,18 +4,18 @@ package hedera
 import "C"
 import "github.com/markbates/oncer"
 
-type QueryGetTransactionReceipt struct {
+type QueryTransactionGetReceipt struct {
 	query
 }
 
-func newQueryGetTransactionReceipt(client Client, id TransactionID) QueryGetTransactionReceipt {
-	return QueryGetTransactionReceipt{
+func newQueryTransactionGetReceipt(client Client, id TransactionID) QueryTransactionGetReceipt {
+	return QueryTransactionGetReceipt{
 		query{C.hedera_query__get_transaction_receipt__new(client.inner, cTransactionID(id))},
 	}
 }
 
 // Deprecated: Use Query.Get() instead
-func (query QueryGetTransactionReceipt) Answer() (TransactionReceipt, error) {
+func (query QueryTransactionGetReceipt) Answer() (TransactionReceipt, error) {
 	oncer.Deprecate(0,
 		"github.com/hashgraph/hedera-sdk-go#Query.Answer()",
 		"Use Query.Get() instead.")
@@ -23,7 +23,7 @@ func (query QueryGetTransactionReceipt) Answer() (TransactionReceipt, error) {
 	return query.Get()
 }
 
-func (query QueryGetTransactionReceipt) Get() (TransactionReceipt, error) {
+func (query QueryTransactionGetReceipt) Get() (TransactionReceipt, error) {
 	var out C.HederaTransactionReceipt
 	res := C.hedera_query__get_transaction_receipt__get(query.inner, &out)
 	if res != 0 {
