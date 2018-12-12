@@ -92,9 +92,11 @@ def build(release=False):
             copy2(f"vendor/hedera-sdk-c/target/{target}/release/{artifact[target]}", f"libs/{target}/")
 
     else:
+        target = default_target
+
         # For development; build only the _default_ target
-        print(f" :: build hedera-sdk-c for {default_target}")
-        sh(f"cargo build --target {default_target}", cwd="vendor/hedera-sdk-c")
+        print(f" :: build hedera-sdk-c for {target}")
+        sh(f"cargo build --target {target}", cwd="vendor/hedera-sdk-c")
 
         # Copy _default_ lib over
         copy2(f"vendor/hedera-sdk-c/target/{target}/debug/{artifact[target]}", f"libs/{target}/")
