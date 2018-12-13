@@ -15,7 +15,7 @@ func main() {
 	}
 
 	// Read and decode target account
-	targetAccountId, err := hedera.AccountIDFromString(os.Getenv("TARGET"))
+	targetAccountID, err := hedera.AccountIDFromString(os.Getenv("TARGET"))
 	if err != nil {
 		panic(err)
 	}

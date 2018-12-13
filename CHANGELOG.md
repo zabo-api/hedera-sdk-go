@@ -15,6 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - `hedera.GenerateSecretKeyWithPassword` functions exactly as `hedera.GenerateSecretKey` except the
    returned mnemonic now will require the password when used to recover the secret key
 
+### Removed
+
+ - `hedera.Query.Cost()`
+
 ## 0.2.0 - 2018-12-07
 
 ### Fixed
