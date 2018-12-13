@@ -36,7 +36,7 @@ func main() {
 	// Get balance for target account
 	//
 
-	balance, err := client.GetAccountBalance(targetAccountId).Answer()
+	balance, err := client.Account(targetAccountID).Balance().Get()
 	if err != nil {
 		panic(err)
 	}
@@ -47,15 +47,15 @@ func main() {
 	// Transfer 100 cryptos to target
 	//
 
-	nodeAccountId := hedera.AccountID{Account: 3}
+	nodeAccountID := hedera.AccountID{Account: 3}
 	operatorAccountID := hedera.AccountID{Account: 2}
-	response, err := client.CryptoTransfer().
+	response, err := client.TransferCrypto().
 		// Move 100 out of operator account
 		Transfer(operatorAccountID, -100).
 		// And place in our new account
-		Transfer(targetAccountId, 100).
+		Transfer(targetAccountID, 100).
 		Operator(operatorAccountID).
-		Node(nodeAccountId).
+		Node(nodeAccountID).
 		Memo("[test] hedera-sdk-go v2").
 		Sign(operatorSecret). // Sign it once as operator
 		Sign(operatorSecret). // And again as sender
@@ -75,7 +75,7 @@ func main() {
 	fmt.Printf("wait for 2s...\n")
 	time.Sleep(2 * time.Second)
 
-	receipt, err := client.GetTransactionReceipt(transactionID).Answer()
+	receipt, err := client.Transaction(*transactionID).Receipt().Get()
 	if err != nil {
 		panic(err)
 	}
@@ -91,7 +91,7 @@ func main() {
 	// Get balance for target account (again)
 	//
 
-	balance, err = client.GetAccountBalance(targetAccountId).Answer()
+	balance, err = client.Account(targetAccountID).Balance().Get()
 	if err != nil {
 		panic(err)
 	}

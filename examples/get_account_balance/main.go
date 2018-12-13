@@ -18,7 +18,7 @@ func main() {
 	accountID := hedera.AccountID{Account: 2}
 
 	// Get the _cost_ or transaction fee for the query of getting the account balance
-	cost, err := client.GetAccountBalance(accountID).Cost()
+	cost, err := client.Account(accountID).Balance().Cost()
 	if err != nil {
 		panic(err)
 	}
@@ -27,7 +27,7 @@ func main() {
 	time.Sleep(1 * time.Second)
 
 	// Get the _answer_ for the query of getting the account balance
-	balance, err := client.GetAccountBalance(accountID).Answer()
+	balance, err := client.Account(accountID).Balance().Get()
 	if err != nil {
 		panic(err)
 	}

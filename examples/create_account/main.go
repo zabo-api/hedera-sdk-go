@@ -66,7 +66,7 @@ func main() {
 	fmt.Printf("wait for 2s...\n")
 	time.Sleep(2 * time.Second)
 
-	receipt, err := client.GetTransactionReceipt(transactionID).Answer()
+	receipt, err := client.Transaction(*transactionID).Receipt().Get()
 	if err != nil {
 		panic(err)
 	}
