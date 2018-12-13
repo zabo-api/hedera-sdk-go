@@ -30,7 +30,7 @@ func (query QueryTransactionGetReceipt) Get() (TransactionReceipt, error) {
 		return TransactionReceipt{}, hederaLastError()
 	}
 
-	receipt := TransactionReceipt{Status: TransactionStatus(out.status)}
+	receipt := TransactionReceipt{Status: TransactionResponse(out.status)}
 
 	if out.account_id != nil {
 		accountID := goAccountID(*out.account_id)
