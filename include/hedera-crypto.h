@@ -31,7 +31,7 @@ extern char* hedera_signature_to_str(HederaSignature*);
 /// secure random number generator.
 ///
 /// The [password] is required with the mnemonic to reproduce the secret key.
-extern HederaSecretKey hedera_secret_key_generate(const char* password, const char** mnemonic);
+extern HederaSecretKey hedera_secret_key_generate(const char* password, char** mnemonic);
 
 /// Parse a [HederaSecretKey] from a hex-encoded string.
 ///
