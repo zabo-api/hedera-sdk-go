@@ -39,7 +39,7 @@ func cTransactionID(id TransactionID) C.HederaTransactionId {
 		account_id: cAccountID(id.AccountID),
 		transaction_valid_start: C.HederaTimestamp{
 			seconds: C.int64_t(id.TransactionValidStart.Unix()),
-			nanos:   C.int32_t(id.TransactionValidStart.Nanosecond()),
+			nanos:   C.uint32_t(id.TransactionValidStart.Nanosecond()),
 		},
 	}
 }

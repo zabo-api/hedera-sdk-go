@@ -17,8 +17,19 @@ type Signature struct {
 	inner C.HederaSignature
 }
 
-func GenerateSecretKey() SecretKey {
-	return SecretKey{C.hedera_secret_key_generate()}
+func GenerateSecretKey() (SecretKey, string) {
+	return GenerateSecretKeyWithPassword("")
+}
+
+func GenerateSecretKeyWithPassword(password string) (SecretKey, string) {
+	cPassword := C.CString(password)
+	defer C.free(unsafe.Pointer(cPassword))
+
+	var mnemonic *C.char
+	secret := C.hedera_secret_key_generate(cPassword, &mnemonic)
+	defer C.free(unsafe.Pointer(mnemonic))
+
+	return SecretKey{secret}, C.GoString(mnemonic)
 }
 
 func SecretKeyFromString(s string) (SecretKey, error) {

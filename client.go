@@ -49,12 +49,12 @@ func (client Client) GetAccountBalance(id AccountID) QueryCryptoGetAccountBalanc
 }
 
 // Deprecated: Use Client.Transaction(id).Receipt() instead
-func (client Client) GetTransactionReceipt(id *TransactionID) QueryGetTransactionReceipt {
+func (client Client) GetTransactionReceipt(id *TransactionID) QueryTransactionGetReceipt {
 	oncer.Deprecate(0,
 		"github.com/hashgraph/hedera-sdk-go#Client.GetTransactionReceipt(id)",
 		"Use Client.Transaction(id).Receipt() instead.")
 
-	return newQueryGetTransactionReceipt(client, *id)
+	return newQueryTransactionGetReceipt(client, *id)
 }
 
 func (client Client) TransferCrypto() TransactionCryptoTransfer {

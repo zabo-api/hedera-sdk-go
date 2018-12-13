@@ -19,7 +19,7 @@ func main() {
 	}
 
 	// Generate a new keypair for the new account
-	secret := hedera.GenerateSecretKey()
+	secret, _ := hedera.GenerateSecretKey()
 	public := secret.Public()
 
 	fmt.Printf("secret = %v\n", secret)
