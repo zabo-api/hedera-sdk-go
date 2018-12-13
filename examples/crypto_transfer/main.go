@@ -80,7 +80,7 @@ func main() {
 		panic(err)
 	}
 
-	if receipt.Status != hedera.TransactionResponseSuccess {
+	if receipt.Status != hedera.TransactionStatusSuccess {
 		panic(fmt.Errorf("transaction has a non-successful status: %v", receipt.Status.String()))
 	}
 
