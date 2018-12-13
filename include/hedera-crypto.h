@@ -27,8 +27,11 @@ extern HederaError hedera_signature_from_str(const char* s, HederaSignature* out
 /// Format a [HederaSignature as a hex-encoded string of the signature.
 extern char* hedera_signature_to_str(HederaSignature*);
 
-/// Generate a new [HederaSecretKey] from a cryptographically secure pseudo-random number generator (CSPRNG).
-extern HederaSecretKey hedera_secret_key_generate();
+/// Generate a new [HederaSecretKey] with a BIP-39 mnemonic using a cryptographically
+/// secure random number generator.
+///
+/// The [password] is required with the mnemonic to reproduce the secret key.
+extern HederaSecretKey hedera_secret_key_generate(const char* password, const char** mnemonic);
 
 /// Parse a [HederaSecretKey] from a hex-encoded string.
 ///
