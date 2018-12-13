@@ -1,62 +1,62 @@
 package hedera
 
-type TransactionStatus uint8
+type Status uint8
 
 const (
-	TransactionStatusOk                             TransactionStatus = 0
-	TransactionStatusInvalidTransaction             TransactionStatus = 1
-	TransactionStatusPayerAccountNotFound           TransactionStatus = 2
-	TransactionStatusInvalidNodeAccount             TransactionStatus = 3
-	TransactionStatusTransactionExpired             TransactionStatus = 4
-	TransactionStatusInvalidTransactionStart        TransactionStatus = 5
-	TransactionStatusInvalidTransactionDuration     TransactionStatus = 6
-	TransactionStatusInvalidSignature               TransactionStatus = 7
-	TransactionStatusMemoTooLong                    TransactionStatus = 8
-	TransactionStatusInsufficientTxFee              TransactionStatus = 9
-	TransactionStatusInsufficientPayerBalance       TransactionStatus = 10
-	TransactionStatusDuplicateTransaction           TransactionStatus = 11
-	TransactionStatusBusy                           TransactionStatus = 12
-	TransactionStatusNotSupported                   TransactionStatus = 13
-	TransactionStatusInvalidFileId                  TransactionStatus = 14
-	TransactionStatusInvalidAccountId               TransactionStatus = 15
-	TransactionStatusInvalidContractId              TransactionStatus = 16
-	TransactionStatusInvalidTransactionId           TransactionStatus = 17
-	TransactionStatusReceiptNotFound                TransactionStatus = 18
-	TransactionStatusRecordNotFound                 TransactionStatus = 19
-	TransactionStatusInvalidSolidityId              TransactionStatus = 20
-	TransactionStatusUnknown                        TransactionStatus = 21
-	TransactionStatusSuccess                        TransactionStatus = 22
-	TransactionStatusFailInvalid                    TransactionStatus = 23
-	TransactionStatusFailFee                        TransactionStatus = 24
-	TransactionStatusFailBalance                    TransactionStatus = 25
-	TransactionStatusKeyRequired                    TransactionStatus = 26
-	TransactionStatusBadEncoding                    TransactionStatus = 27
-	TransactionStatusInsufficientAccountBalance     TransactionStatus = 28
-	TransactionStatusInvalidSolidityAddress         TransactionStatus = 29
-	TransactionStatusInsufficientGas                TransactionStatus = 30
-	TransactionStatusContractSizeLimitExceeded      TransactionStatus = 31
-	TransactionStatusLocalCallModificationException TransactionStatus = 32
-	TransactionStatusContractRevertExecuted         TransactionStatus = 33
-	TransactionStatusContractExecutionException     TransactionStatus = 34
-	TransactionStatusInvalidReceivingNodeAccount    TransactionStatus = 35
-	TransactionStatusMissingQueryHeader             TransactionStatus = 36
-	TransactionStatusAccountUpdateFailed            TransactionStatus = 37
-	TransactionStatusInvalidKeyEncoding             TransactionStatus = 38
-	TransactionStatusNullSolidityAddress            TransactionStatus = 39
-	TransactionStatusContractUpdateFailed           TransactionStatus = 40
-	TransactionStatusInvalidQueryHeader             TransactionStatus = 41
-	TransactionStatusInvalidFeeSubmitted            TransactionStatus = 42
-	TransactionStatusInvalidPayerSignature          TransactionStatus = 43
-	TransactionStatusKeyNotProvided                 TransactionStatus = 44
-	TransactionStatusInvalidExpirationTime          TransactionStatus = 45
-	TransactionStatusNoWaclKey                      TransactionStatus = 46
-	TransactionStatusFileContentEmpty               TransactionStatus = 47
-	TransactionStatusInvalidAccountAmounts          TransactionStatus = 48
-	TransactionStatusEmptyTransactionBody           TransactionStatus = 49
-	TransactionStatusInvalidTransactionBody         TransactionStatus = 50
+	StatusOk                             Status = 0
+	StatusInvalidTransaction             Status = 1
+	StatusPayerAccountNotFound           Status = 2
+	StatusInvalidNodeAccount             Status = 3
+	StatusTransactionExpired             Status = 4
+	StatusInvalidTransactionStart        Status = 5
+	StatusInvalidTransactionDuration     Status = 6
+	StatusInvalidSignature               Status = 7
+	StatusMemoTooLong                    Status = 8
+	StatusInsufficientTxFee              Status = 9
+	StatusInsufficientPayerBalance       Status = 10
+	StatusDuplicateTransaction           Status = 11
+	StatusBusy                           Status = 12
+	StatusNotSupported                   Status = 13
+	StatusInvalidFileId                  Status = 14
+	StatusInvalidAccountId               Status = 15
+	StatusInvalidContractId              Status = 16
+	StatusInvalidTransactionId           Status = 17
+	StatusReceiptNotFound                Status = 18
+	StatusRecordNotFound                 Status = 19
+	StatusInvalidSolidityId              Status = 20
+	StatusUnknown                        Status = 21
+	StatusSuccess                        Status = 22
+	StatusFailInvalid                    Status = 23
+	StatusFailFee                        Status = 24
+	StatusFailBalance                    Status = 25
+	StatusKeyRequired                    Status = 26
+	StatusBadEncoding                    Status = 27
+	StatusInsufficientAccountBalance     Status = 28
+	StatusInvalidSolidityAddress         Status = 29
+	StatusInsufficientGas                Status = 30
+	StatusContractSizeLimitExceeded      Status = 31
+	StatusLocalCallModificationException Status = 32
+	StatusContractRevertExecuted         Status = 33
+	StatusContractExecutionException     Status = 34
+	StatusInvalidReceivingNodeAccount    Status = 35
+	StatusMissingQueryHeader             Status = 36
+	StatusAccountUpdateFailed            Status = 37
+	StatusInvalidKeyEncoding             Status = 38
+	StatusNullSolidityAddress            Status = 39
+	StatusContractUpdateFailed           Status = 40
+	StatusInvalidQueryHeader             Status = 41
+	StatusInvalidFeeSubmitted            Status = 42
+	StatusInvalidPayerSignature          Status = 43
+	StatusKeyNotProvided                 Status = 44
+	StatusInvalidExpirationTime          Status = 45
+	StatusNoWaclKey                      Status = 46
+	StatusFileContentEmpty               Status = 47
+	StatusInvalidAccountAmounts          Status = 48
+	StatusEmptyTransactionBody           Status = 49
+	StatusInvalidTransactionBody         Status = 50
 )
 
-var transactionStatusText = map[TransactionStatus]string{
+var statusText = map[Status]string{
 	0 : "OK",
 	1 : "INVALIDTRANSACTION",
 	2 : "PAYERACCOUNTNOTFOUND",

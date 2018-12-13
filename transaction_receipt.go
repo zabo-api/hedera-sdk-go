@@ -1,12 +1,12 @@
 package hedera
 
 type TransactionReceipt struct {
-	Status     TransactionStatus
+	Status     Status
 	AccountID  *AccountID
 	ContractID *ContractID
 	FileID     *FileID
 }
 
-func (status TransactionStatus) String() string {
-	return transactionStatusText[status]
+func (status Status) String() string {
+	return statusText[status]
 }
