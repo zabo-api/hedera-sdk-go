@@ -3,63 +3,57 @@ package hedera
 type TransactionResponse uint8
 
 const (
-	TransactionResponseOK TransactionResponse = 0
-	TransactionResponseINVALIDTRANSACTION TransactionResponse = 1
-	TransactionResponsePAYERACCOUNTNOTFOUND  TransactionResponse = 2
-	TransactionResponseINVALIDNODEACCOUNT TransactionResponse = 3
-	TransactionResponseTRANSACTIONEXPIRED TransactionResponse = 4
-	TransactionResponseINVALIDTRANSACTIONSTART TransactionResponse = 5
-	TransactionResponseINVALIDTRANSACTIONDURATION TransactionResponse = 6
-	TransactionResponseINVALIDSIGNATURE TransactionResponse = 7
-	TransactionResponseMEMOTOOLONG TransactionResponse = 8
-	TransactionResponseINSUFFICIENTTXFEE  TransactionResponse = 9
-	TransactionResponseINSUFFICIENTPAYERBALANCE  TransactionResponse = 10
-	TransactionResponseDUPLICATETRANSACTION TransactionResponse = 11
-	TransactionResponseBUSY TransactionResponse = 12
-	TransactionResponseNOTSUPPORTED TransactionResponse = 13
-
-	TransactionResponseINVALIDFILEID TransactionResponse = 14
-	TransactionResponseINVALIDACCOUNTID TransactionResponse = 15
-	TransactionResponseINVALIDCONTRACTID TransactionResponse = 16
-	TransactionResponseINVALIDTRANSACTIONID TransactionResponse = 17
-	TransactionResponseRECEIPTNOTFOUND TransactionResponse = 18
-	TransactionResponseRECORDNOTFOUND TransactionResponse = 19
-	TransactionResponseINVALIDSOLIDITYID TransactionResponse = 20
-
-	TransactionResponseUNKNOWN TransactionResponse = 21
-	TransactionResponseSUCCESS TransactionResponse = 22
-	TransactionResponseFAILINVALID TransactionResponse = 23
-	TransactionResponseFAILFEE TransactionResponse = 24
-	TransactionResponseFAILBALANCE TransactionResponse = 25
-
-	TransactionResponseKEYREQUIRED TransactionResponse = 26
-	TransactionResponseBADENCODING TransactionResponse = 27
-	TransactionResponseINSUFFICIENTACCOUNTBALANCE TransactionResponse = 28
-	TransactionResponseINVALIDSOLIDITYADDRESS TransactionResponse = 29
-
-	TransactionResponseINSUFFICIENTGAS TransactionResponse = 30
-	TransactionResponseCONTRACTSIZELIMITEXCEEDED TransactionResponse = 31
-	TransactionResponseLOCALCALLMODIFICATIONEXCEPTION TransactionResponse = 32
-	TransactionResponseCONTRACTREVERTEXECUTED TransactionResponse = 33
-	TransactionResponseCONTRACTEXECUTIONEXCEPTION TransactionResponse= 34
-	TransactionResponseINVALIDRECEIVINGNODEACCOUNT TransactionResponse = 35
-	TransactionResponseMISSINGQUERYHEADER TransactionResponse = 36
-	TransactionResponseACCOUNTUPDATEFAILED TransactionResponse = 37
-	TransactionResponseINVALIDKEYENCODING TransactionResponse = 38
-	TransactionResponseNULLSOLIDITYADDRESS TransactionResponse = 39
-	TransactionResponseCONTRACTUPDATEFAILED TransactionResponse = 40
-	TransactionResponseINVALIDQUERYHEADER TransactionResponse = 41
-	TransactionResponseINVALIDFEESUBMITTED TransactionResponse = 42
-	TransactionResponseINVALIDPAYERSIGNATURE TransactionResponse = 43
-
-	TransactionResponseKEYNOTPROVIDED TransactionResponse = 44
-	TransactionResponseINVALIDEXPIRATIONTIME TransactionResponse = 45
-	TransactionResponseNOWACLKEY TransactionResponse = 46
-	TransactionResponseFILECONTENTEMPTY TransactionResponse = 47
-	TransactionResponseINVALIDACCOUNTAMOUNTS TransactionResponse = 48
-
-	TransactionResponseEMPTYTRANSACTIONBODY TransactionResponse = 49
-	TransactionResponseINVALIDTRANSACTIONBODY TransactionResponse = 50
+	TransactionResponseOk TransactionResponse = 0
+	TransactionResponseInvalidTransaction TransactionResponse = 1
+	TransactionResponsePayerAccountNotFound TransactionResponse = 2
+	TransactionResponseInvalidNodeAccount TransactionResponse = 3
+	TransactionResponseTransactionExpired TransactionResponse = 4
+	TransactionResponseInvalidTransactionStart TransactionResponse = 5
+	TransactionResponseInvalidTransactionDuration TransactionResponse = 6
+	TransactionResponseInvalidSignature TransactionResponse = 7
+	TransactionResponseMemoTooLong TransactionResponse = 8
+	TransactionResponseInsufficientTxFee TransactionResponse = 9
+	TransactionResponseInsufficientPayerBalance TransactionResponse = 10
+	TransactionResponseDuplicateTransaction TransactionResponse = 11
+	TransactionResponseBusy TransactionResponse = 12
+	TransactionResponseNotSupported TransactionResponse = 13
+	TransactionResponseInvalidFileId TransactionResponse = 14
+	TransactionResponseInvalidAccountId TransactionResponse = 15
+	TransactionResponseInvalidContractId TransactionResponse = 16
+	TransactionResponseInvalidTransactionId TransactionResponse = 17
+	TransactionResponseReceiptNotFound TransactionResponse = 18
+	TransactionResponseRecordNotFound TransactionResponse = 19
+	TransactionResponseInvalidSolidityId TransactionResponse = 20
+	TransactionResponseUnknown TransactionResponse = 21
+	TransactionResponseSuccess TransactionResponse = 22
+	TransactionResponseFailInvalid TransactionResponse = 23
+	TransactionResponseFailFee TransactionResponse = 24
+	TransactionResponseFailBalance TransactionResponse = 25
+	TransactionResponseKeyRequired TransactionResponse = 26
+	TransactionResponseBadEncoding TransactionResponse = 27
+	TransactionResponseInsufficientAccountBalance TransactionResponse = 28
+	TransactionResponseInvalidSolidityAddress TransactionResponse = 29
+	TransactionResponseInsufficientGas TransactionResponse = 30
+	TransactionResponseContractSizeLimitExceeded TransactionResponse = 31
+	TransactionResponseLocalCallModificationException TransactionResponse = 32
+	TransactionResponseContractRevertExecuted TransactionResponse = 33
+	TransactionResponseContractExecutionException TransactionResponse = 34
+	TransactionResponseInvalidReceivingNodeAccount TransactionResponse = 35
+	TransactionResponseMissingQueryHeader TransactionResponse = 36
+	TransactionResponseAccountUpdateFailed TransactionResponse = 37
+	TransactionResponseInvalidKeyEncoding TransactionResponse = 38
+	TransactionResponseNullSolidityAddress TransactionResponse = 39
+	TransactionResponseContractUpdateFailed TransactionResponse = 40
+	TransactionResponseInvalidQueryHeader TransactionResponse = 41
+	TransactionResponseInvalidFeeSubmitted TransactionResponse = 42
+	TransactionResponseInvalidPayerSignature TransactionResponse = 43
+	TransactionResponseKeyNotProvided TransactionResponse = 44
+	TransactionResponseInvalidExpirationTime TransactionResponse = 45
+	TransactionResponseNoWaclKey TransactionResponse = 46
+	TransactionResponseFileContentEmpty TransactionResponse = 47
+	TransactionResponseInvalidAccountAmounts TransactionResponse = 48
+	TransactionResponseEmptyTransactionBody TransactionResponse = 49
+	TransactionResponseInvalidTransactionBody TransactionResponse = 50
 )
 
 var transactionResponseText = map[TransactionResponse]string{
