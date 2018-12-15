@@ -13,7 +13,7 @@ extern "C" {
 extern HederaQuery* hedera_query__crypto_get_claim__new(
     HederaClient*,
     HederaAccountId account_id,
-    HederaArray hash,
+    HederaArray hash
 );
 
 extern HederaError hedera_query__crypto_get_claim__get(HederaQuery*, HederaClaim**);
