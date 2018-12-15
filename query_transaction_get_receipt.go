@@ -10,7 +10,7 @@ type QueryTransactionGetReceipt struct {
 
 func newQueryTransactionGetReceipt(client Client, id TransactionID) QueryTransactionGetReceipt {
 	return QueryTransactionGetReceipt{
-		query{C.hedera_query__get_transaction_receipt__new(client.inner, cTransactionID(id))},
+		query{C.hedera_query__transaction_get_receipt__new(client.inner, cTransactionID(id))},
 	}
 }
 
@@ -25,7 +25,7 @@ func (query QueryTransactionGetReceipt) Answer() (TransactionReceipt, error) {
 
 func (query QueryTransactionGetReceipt) Get() (TransactionReceipt, error) {
 	var out C.HederaTransactionReceipt
-	res := C.hedera_query__get_transaction_receipt__get(query.inner, &out)
+	res := C.hedera_query__transaction_get_receipt__get(query.inner, &out)
 	if res != 0 {
 		return TransactionReceipt{}, hederaLastError()
 	}
