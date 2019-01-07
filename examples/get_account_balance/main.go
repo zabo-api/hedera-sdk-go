@@ -3,18 +3,29 @@ package main
 import (
 	"fmt"
 	"github.com/hashgraph/hedera-sdk-go"
+	"os"
 )
 
 func main() {
-	client, err := hedera.Dial("testnet.hedera.com:50001")
+	// Target account to get the balance for
+	accountID := hedera.AccountID{Account: 2}
+
+	client, err := hedera.Dial("testnet.hedera.com:50003")
 	if err != nil {
 		panic(err)
 	}
 
-	defer client.Close()
+	client.SetNode(hedera.AccountID{Account: 3})
+	client.SetOperator(accountID, func() hedera.SecretKey {
+		operatorSecret, err := hedera.SecretKeyFromString(os.Getenv("OPERATOR_SECRET"))
+		if err != nil {
+			panic(err)
+		}
 
-	// Target account to get the balance for
-	accountID := hedera.AccountID{Account: 2}
+		return operatorSecret
+	})
+
+	defer client.Close()
 
 	// Get the _answer_ for the query of getting the account balance
 	balance, err := client.Account(accountID).Balance().Get()

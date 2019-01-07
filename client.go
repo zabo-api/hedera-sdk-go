@@ -2,11 +2,18 @@ package hedera
 
 // #include <stdlib.h>
 // #include "hedera.h"
+//
+// int operatorSecretCallback(void*, HederaSecretKey*);
+//
+// static void _client_set_operator(HederaClient* client, HederaAccountId id, void* user_data) {
+//   hedera_client_set_operator(client, id, &operatorSecretCallback, user_data);
+// }
 import "C"
 import (
 	"unsafe"
 
 	"github.com/markbates/oncer"
+	"github.com/mattn/go-pointer"
 )
 
 type Client struct {
@@ -24,6 +31,24 @@ func Dial(address string) (Client, error) {
 	}
 
 	return Client{inner}, nil
+}
+
+func (client Client) SetNode(node AccountID) {
+	C.hedera_client_set_node(client.inner, cAccountID(node))
+}
+
+//export operatorSecretCallback
+func operatorSecretCallback(v unsafe.Pointer, out *C.HederaSecretKey) C.int {
+	cb := pointer.Restore(v).(*func() SecretKey)
+	key := (*cb)()
+	*out = key.inner
+
+	return 0
+}
+
+func (client Client) SetOperator(operator AccountID, secretCallback func() SecretKey) {
+	userData := pointer.Save(&secretCallback)
+	C._client_set_operator(client.inner, cAccountID(operator), userData)
 }
 
 func (client Client) Close() {

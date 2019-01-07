@@ -9,6 +9,7 @@ import (
 
 func main() {
 	// Read and decode the operator secret key
+	operatorAccountID := hedera.AccountID{Account: 2}
 	operatorSecret, err := hedera.SecretKeyFromString(os.Getenv("OPERATOR_SECRET"))
 	if err != nil {
 		panic(err)
@@ -24,12 +25,16 @@ func main() {
 	// Connect to Hedera
 	//
 
-	client, err := hedera.Dial("testnet.hedera.com:50001")
+	client, err := hedera.Dial("testnet.hedera.com:50003")
 	if err != nil {
 		panic(err)
 	}
 
-	// TODO: client.SetRetryOnFailure(0) // default: 5
+	client.SetNode(hedera.AccountID{Account: 3})
+	client.SetOperator(operatorAccountID, func() hedera.SecretKey {
+		return operatorSecret
+	})
+
 	defer client.Close()
 
 	//
@@ -48,7 +53,6 @@ func main() {
 	//
 
 	nodeAccountID := hedera.AccountID{Account: 3}
-	operatorAccountID := hedera.AccountID{Account: 2}
 	response, err := client.TransferCrypto().
 		// Move 100 out of operator account
 		Transfer(operatorAccountID, -100).
