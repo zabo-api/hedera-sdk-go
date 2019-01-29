@@ -140,14 +140,16 @@ You should also scroll down until you see a box labelled "Network" and make a no
 
 A more complete example, which includes code fragments in this section can be found in the [get_account_balance example](/examples/get_account_balance/main.go) file located in the [examples](/examples/) folder of this repo. This simplified example is broken into bite-sized pieces here so that accompanying explanations can be seen in context alongside each fragment.
 
-Create a new `main.go` file importing `fmt` (for `Printf`), `time` and the Hedera SDK. It's also useful to create a variable `oneHbar` to represent the number of **_tinybars_** in one **_hbar_**:
+Create a new `main.go` file importing `fmt` (for `Printf`) and the Hedera SDK. The `time` package is also imported but *commented* here. This package will be required later in this example and can be un-commented when required by removing the preceding `//`.
+
+It's also useful to create a variable `oneHbar` to represent the number of **_tinybars_** in one **_hbar_**:
 
 ```go
 package main
 
 import (
   "fmt"
-  "time"
+  //"time"
   "github.com/hashgraph/hedera-sdk-go"
 )
 
@@ -235,6 +237,8 @@ Account 1234 balance = 1005.00005 hbars
 >```go
 >  time.Sleep(1 * time.Second)
 >```
+>
+> Don't forget to remove the `//` comment symbols before `"time"` (in the `import` section at the beginning of the program) to gain access to the functions in the go time package. Some IDEs will automatically add missing packages when detected, so don't be surprised if you find that a new `"time"` line has appeared alongside `//"time"`.
 
 ### Enhance your application to check a friend's account balance
 
@@ -244,7 +248,7 @@ If you know the account ID of another account on your testnet – perhaps a frie
 
 * To continue with this example, add the following code into your existing `func main` function, just before the closing braces:
 
-* As mentioned above, we will add a small delay to ensure that we do not exceed testnet throttling limits. For brevity, this statement will be included _without further comment_ in all subsequent examples.
+* As mentioned above, we will add a small delay to ensure that we do not exceed testnet throttling limits. For brevity, this statement will be included _without further comment_ in all subsequent examples. If you get an error here, you need to remove the `//` before `"time"` in the `import` block near the beginning of the program.
 
 * Before executing any transfers, you can initialise a second variable `friendAccount` representing the second account, query its balance and output the result.
 
