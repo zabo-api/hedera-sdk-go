@@ -91,7 +91,7 @@ go get github.com/hashgraph/hedera-sdk-go
 
 ## Creating a public/private keypair for testnet use
 
-As a general principle, it is bad practise to use your mainnet keys on a testnet. The code below shows the content of the [generate_key example](/examples/generate_key/main.go) file. This shows how you can create new public and private keys using the Hedera SDK for Go:
+As a general principle, it is bad practice to use your mainnet keys on a testnet. The code below shows the content of the [generate_key example](/examples/generate_key/main.go) file. This shows how you can create new public and private keys using the Hedera SDK for Go:
 
 ```go
 package main
@@ -117,7 +117,7 @@ func main() {
 go run main.go
 ```
 
-* Make a note of the 24-word mnemonic, and both of the keys that are output. For a testnet you can copy and paste this information into a text file. For security reasons you should **_never do this for mainnet_**.
+* Make careful note of the 24-word mnemonic and both of the keys that are generateed. For a testnet you can copy and paste this information into a text file. For security reasons you should **_never do this for mainnet_**.
 
 > **Development Environment Note**
 >
@@ -182,6 +182,8 @@ You should also handle any errors and defer disconnection from the tesnet to kee
 
 Once a connection has been established, you need to decide which node to send your query to. Testnets provide each developer with a single node's account ID (labelled `node` in the portal) in order to simplify this and limit testnet infrastructure burden. On mainnet it will be the responsibility of the application to choose a node - usually at random.
 
+> **Node Account Defaults**: The `client.SetNode()` function sets the default node account for all future transactions until changed and unless overridden. In these examples this is not strictly necessary as all of the transaction examples in this document include `Node(nodeAccount)`. When using testnets, it is also worth noting that the SDK uses node account `0.0.3` by default – even when neither of these mechanisms is used.
+
 The node account ID should look something like `0.0.3`. Since `Shard ID` and `Realm ID` are not yet in use, they are defaulted to zero. It is the last number (in this example `3`) that you should use in the following code:
 
 ```go
@@ -191,7 +193,7 @@ The node account ID should look something like `0.0.3`. Since `Shard ID` and `Re
 
 It is also important to specify which account is initiating this query – known as the **operator** account – so that the account can be charged a small fee for the execution of this query. In order to authorise the payment of such a fee, the operator must sign the request using their private key.
 
-> **Security Tip**: In the [get_account_balance example](/examples/get_account_balance/main.go) file located in the [examples](/examples/) folder, the `os.Getenv("OPERATOR_SECRET")` function is used. This retrieves the private key from an environment variable called OPERATOR_SECRET. It is good practise to use this technique, as it avoids accidental publication of private keys when storing code in public repos or sharing them accidentally via collaboration tools. Don't forget: If someone else knows your private key, they effectively own your account! Although the impact of this is low when using testnets, it could be a very expensive mistake on mainnet. For purposes of clarity, the example below has been simplified and does not use an environment variable
+> **Security Tip**: In the [get_account_balance example](/examples/get_account_balance/main.go) file located in the [examples](/examples/) folder, the `os.Getenv("OPERATOR_SECRET")` function is used. This retrieves the private key from an environment variable called OPERATOR_SECRET. It is good practice to use this technique, as it avoids accidental publication of private keys when storing code in public repos or sharing them accidentally via collaboration tools. Don't forget: If someone else knows your private key, they effectively own your account! Although the impact of this is low when using testnets, it could be a very expensive mistake on mainnet. For purposes of clarity, the example below has been simplified and does not use an environment variable
 
 Replace `<my-private-key>` with the private key you generated near the beginning of these instructions.
 
@@ -204,6 +206,8 @@ Replace `<my-private-key>` with the private key you generated near the beginning
     return operatorSecret
   })
 ```
+
+Again, note that the `client.SetOperator()` function is used to set the default operator account for subsequent transactions. This is not necessary if both `Operator()` and `Sign()` are used when creating the transaction, but is included here in order to explain both approaches.
 
 At this point, you're ready to query your account balance. The `client.Account(myAccount).Balance()` constructs the request; adding `.Get()` executes that request. Once again, don't forget to handle possible failures.
 
@@ -325,7 +329,9 @@ __8__. `Sign(operatorSecret).` adds a signature for the account from which **_hb
 
 __9__. `Execute()` executes the transaction.
 
-> #### Transfer tips
+ If the `client.SetOperator()` function is used to set the default operator as illustrated above, lines __4__ and __7__ can be omitted. If the `client.SetNode()` function is used to set the default node as illustrated above, line __5__ can also be ommited.
+
+> #### Multi-party transfers
 >
 > It is possible to create a transfer transaction containing **multiple** _to_ and **multiple** _from_accounts within that same transaction. In a case where multiple accounts were to be debited, signatures would be required for each one, and addition `Sign(...).` lines would be required.
 >
