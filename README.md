@@ -246,7 +246,19 @@ Account 1234 balance = 1005.00005 hbars
 
 ### Enhance your application to check a friend's account balance
 
-If you know the account ID of another account on your testnet – perhaps a friend or colleague – you can also check their balance. If your friends won’t share their accounts, or if you don’t have any friends, see the [Create Account Example](/examples/create_account/main.go) included in this repo. You can create as many accounts as you need; be aware that some testnet __ℏ__ (hbars) should be transferred to new accounts during the account creation process as an "opening balance."
+If you know the account ID of another account on your testnet – perhaps a friend or colleague – you can also check their balance.
+
+> **Creating an additional testnet account**
+>
+> If your friends won’t share their accounts, or if you don’t have any friends, see the [Create Account Example](/examples/create_account/main.go) included in this repo.
+>
+> If you do choose to create an account using that example, don't forget to do the following:
+>
+> 1. Create a local environment variable OPERATOR_SECRET that contains your private key.
+> 2. Adjust the `nodeAccountID` variable to the ID you see in the portal.
+> 3. Update the `testnet.hedera.com:...` testnet address to the correct one.
+> 4. Change the `operatorAccountID` variable value to your own testnet account ID.
+> 5. Change the `InitialBalance` to an acceptable quantity of testnet tinybars.
 
 * For the purposes of this example, an Account ID of `0:0:1235` will be used for that second account. Don't forget to amend `1235` to the account number of your friend's account. If you forget to do this will you will probably see a `transaction failed the pre-check: InvalidAccount` message.
 
