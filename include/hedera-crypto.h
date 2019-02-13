@@ -10,13 +10,22 @@ extern "C" {
 #endif
 
 /// An ed25519 public key.
-typedef struct { uint8_t bytes[32]; } HederaPublicKey;
+typedef struct {
+    uint8_t compressed[32];
+
+    struct {
+        uint64_t x[5];
+        uint64_t y[5];
+        uint64_t z[5];
+        uint64_t t[5];
+    } point;
+} HederaPublicKey;
 
 /// An EdDSA secret key.
 typedef struct { uint8_t bytes[32]; } HederaSecretKey;
 
 /// An EdDSA signature.
-typedef struct { uint8_t bytes[64]; } HederaSignature;
+typedef struct { uint8_t r[32]; uint8_t s[32]; } HederaSignature;
 
 /// Parse a [HederaSignature] from a hex-encoded string.
 ///

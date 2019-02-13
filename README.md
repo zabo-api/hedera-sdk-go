@@ -1,5 +1,8 @@
 # Hedera SDK for Go
 
+[![GoDoc](https://godoc.org/github.com/hashgraph/hedera-sdk-go?status.svg)](https://godoc.org/github.com/hashgraph/hedera-sdk-go)
+[![](https://goreportcard.com/badge/github.com/hashgraph/hedera-sdk-go)](https://goreportcard.com/report/github.com/hashgraph/hedera-sdk-go)
+
 This repo contains the Go SDK for interacting with the [Hedera](https://hedera.com) platform. Hedera is the _only_ **public** distributed ledger licensed to use the Hashgraph consensus algorithm for fast, fair and secure transactions. By using any of the Hedera SDKs, developers will be empowered to build an entirely new class of decentralized applications.
 
 Following the instructions below should help you to reach the position where you can send transactions and queries to a Hedera testnet or the Hedera mainnet.
