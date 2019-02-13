@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
 	"os"
 	"time"
 
@@ -31,6 +32,9 @@ func main() {
 
 	defer client.Close()
 
+	// load example file
+	data, err := ioutil.ReadFile("../files/Hedera.txt")
+
 	//
 	// Send transaction to create a file
 	//
@@ -43,7 +47,7 @@ func main() {
 	response, err := client.CreateFile().
 		Key(public).
 		ExpiresAt(expiryTime).
-		Contents([]byte("Hedera Hashgraph is great")).
+		Contents(data).
 		Operator(operatorAccountID).
 		Node(nodeAccountID).
 		Memo("[test] hedera-sdk-go file-create").
