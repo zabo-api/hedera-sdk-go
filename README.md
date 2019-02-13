@@ -492,7 +492,7 @@ Version 2.0 – see [LICENSE](LICENSE) in this repo or [apache.org/licenses/LICE
 [03-02-hedera-acct]: #hedera-account
 [03-03-hedera-testnet]: #hedera-testnet-access
 [04-installing]: #installing-the-hedera-sdk-for-go
-[05-create-keypair]: creating-a-publicprivate-keypair-for-testnet-use
+[05-create-keypair]: #creating-a-publicprivate-keypair-for-testnet-use
 [06-assoc-key]: #associating-your-public-key-with-you-hedera-tesnet-account
 [07-first-hedera]: #your-first-hedera-application
 [07-01-check-balance]: #checking-your-account-balance
