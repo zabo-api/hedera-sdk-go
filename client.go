@@ -64,6 +64,10 @@ func (client Client) CryptoTransfer() TransactionCryptoTransfer {
 	return client.TransferCrypto()
 }
 
+func (client Client) CryptoUpdate(id AccountID) TransactionCryptoUpdate {
+	return client.UpdateAccount(id)
+}
+
 // Deprecated: Use Client.Account(id).Balance() instead
 func (client Client) GetAccountBalance(id AccountID) QueryCryptoGetAccountBalance {
 	oncer.Deprecate(0,
@@ -82,6 +86,7 @@ func (client Client) GetTransactionReceipt(id *TransactionID) QueryTransactionGe
 	return newQueryTransactionGetReceipt(client, *id)
 }
 
+// Crypto
 func (client Client) TransferCrypto() TransactionCryptoTransfer {
 	return newTransactionCryptoTransfer(&client)
 }
@@ -90,10 +95,24 @@ func (client Client) CreateAccount() TransactionCryptoCreate {
 	return newTransactionCryptoCreate(&client)
 }
 
+func (client Client) UpdateAccount(id AccountID) TransactionCryptoUpdate {
+	return newTransactionCryptoUpdate(&client, id)
+}
+
 func (client Client) Account(id AccountID) PartialAccountMessage {
 	return PartialAccountMessage{client, id}
 }
 
+// file
+func (client Client) CreateFile() TransactionFileCreate {
+	return newTransactionFileCreate(&client)
+}
+
+func (client Client) AppendFile(id FileID, contents []byte) TransactionFileAppend {
+	return newTransactionFileAppend(&client, id, contents)
+}
+
+// transaction
 func (client Client) Transaction(id TransactionID) PartialTransactionMessage {
 	return PartialTransactionMessage{client, id}
 }

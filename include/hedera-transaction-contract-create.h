@@ -31,7 +31,7 @@ extern void hedera_transaction__contract_create__set_auto_renew_period(
     HederaTransaction*, HederaDuration period);
 
 extern void hedera_transaction__contract_create__set_constructor_parameters(
-    HederaTransaction*, const uint8_t* parameters);
+    HederaTransaction*, const uint8_t* parameters, size_t parameters_t);
 
 #ifdef __cplusplus
 }
