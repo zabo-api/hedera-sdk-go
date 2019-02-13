@@ -2,15 +2,43 @@
 
 This repo contains the Go SDK for interacting with the [Hedera](https://hedera.com) platform. Hedera is the _only_ **public** distributed ledger licensed to use the Hashgraph consensus algorithm for fast, fair and secure transactions. By using any of the Hedera SDKs, developers will be empowered to build an entirely new class of decentralized applications.
 
-Developers who create Hedera accounts and test their applications on our testnet are offered the opportunity to earn real mainnet __ℏ__ (__hbars__) based upon that testing activity. The SDKs are intended to facilitate application development and encourage such testing. See the Hedera Account section below for further details.
+Following the instructions below should help you to reach the position where you can send transactions and queries to a Hedera testnet or the Hedera mainnet.
 
-> **Hbars**:
+## Table of Contents
+
+* **[Developer Rewards][01-dev-rewards]**
+* **[Architectural Overview][02-arch-overview]**
+* **[Prerequisites][03-prerequisites]**
+  * **[Software][03-01-software]**
+  * **[Hedera Account][03-02-hedera-acct]**
+  * **[Hedera testnet access][03-03-hedera-testnet]**
+* **[Installing the Hedera SDK for Go][04-installing]**
+* **[Creating a public/private keypair for testnet use][05-create-keypair]**
+* **[Associating your public key with you Hedera testnet account][06-assoc-key]**
+* **[Your First Hedera Application][07-first-hedera]**
+  * **[Checking your account balance][07-01-check-balance]**
+  * **[Enhance your application to check a friend's account balance][07-02-friend-balance]**
+  * **[Next step: Transferring hbars to a friend's account][07-03-transfer-hbars]**
+* **[Other resources][08-other-res]**
+* **[Getting in touch][09-get-in-touch]**
+* **[Contributing to this project][10-contribute]**
+* **[License information][11-license]**
+
+--------
+
+## Developer Rewards
+
+Developers who create Hedera accounts and test their applications on our testnet are offered the opportunity to earn real mainnet __ℏ__ ([__hbars__](#a-hbar)) based upon that testing activity. The SDKs are intended to facilitate application development and encourage such testing. See the [Hedera Account][03-02-hedera-acct] section for further details.
+
+Developers who create Hedera accounts and test their applications on our testnet are offered the opportunity to earn real mainnet __ℏ__ ([__hbars__](#a-hbar)) based upon that testing activity. The SDKs are intended to facilitate application development and encourage such testing. See the [Hedera Account][03-02-hedera-acct] section for further details.
+
+> <a id="a-hbar">**Hbars**:</a>
 >
 > _Hbars_ are the native cryptocurrency that is used to pay for transactions on the Hedera platform and to secure the network from certain types of cyberattacks. They are the native platform coin needed to interact with and exchange value on Hedera.
 >
 > The symbol for hbars is "**ℏ**" so `5 ℏ` means 5 hbars
 >
-> **Tinybars**:
+> <a id="a-tinybar">**Tinybars**:</a>
 >
 > Tinybars are (not surprisingly) smaller than hbars. They are used to divide hbars into smaller amounts. One hbar is equivalent to one hundred million tinybars.
 >
@@ -18,13 +46,11 @@ Developers who create Hedera accounts and test their applications on our testnet
 >
 > _**Important Note**: The values of all fees and transfers throughout the Hedera SDKs are represented in tinybars, though the term hbars may be used for the purposes of brevity._
 
+## Architectural Overview
+
 All Hedera SDKs are intended to provide a developer-friendly means to leverage the Hedera API, which is based on [Google Protobuf](https://developers.google.com/protocol-buffers/). Protobuf supports code generation for a growing number of languages and is highly optimised for efficient communications. For those interesting in viewing the underlying protobuf message definitions, see the [Hedera Protobuf Message Definitions](https://github.com/hashgraph/hedera-protobuf) repo.
 
 Developers who wish to work in other languages are at liberty to do so, but should be aware that implementation of cryptographic key generation and manipulation is not a trivial undertaking. The source code for the cryptography libraries used by this project can be found in the [Hedera SDK for Rust](https://github.com/hashgraph/hedera-sdk-rust) repository although they are compiled to C for inclusion in this project. We would recommend use of these same libraries for developers interested in adding support for other languages.
-
-## Getting Started
-
-Cloning this repo and following the instructions below will get a copy of the [Hedera SDK for Go](https://github.com/hashgraph/hedera-sdk-go) project up and running on your local machine. You should then be in a position to send transactions and queries to a Hedera testnet or the Hedera mainnet.
 
 ## Prerequisites
 
@@ -59,16 +85,16 @@ Cloning this repo and following the instructions below will get a copy of the [H
 
 ### Hedera Account
 
-The [Hedera Portal](https://go.hedera.com) allows people to create a **Hedera Account** facilitating access to the Hedera mainnet and Hedera testnets. A Hedera Account allows entry of a testnet access code, in order to add a number of testnet __ℏ__ (hbars) to a testnet account created (as can be seen below) using Hedera SDKs. The public key associated with a testnet account must also be associated with your Hedera account. A detailed explanation of this whole process is contained within the instructions below.
+The [Hedera Portal](https://go.hedera.com) allows people to create a **Hedera Account** facilitating access to the Hedera mainnet and Hedera testnets. A Hedera Account allows entry of a testnet access code, in order to add a number of testnet __ℏ__ ([hbars](#a-hbar)) to a testnet account created (as can be seen [below][03-03-hedera-testnet]) using Hedera SDKs. The public key associated with a testnet account must also be associated with your Hedera account. A detailed explanation of this whole process is contained within this document.
 
 * In order to gain early access (before Open Access) to a Hedera testnet or the Hedera mainnet users must create a Hedera account, including full identity verification. You can do this using the [Hedera Portal](https://go.hedera.com).
-* We want to allow devs to earn __ℏ__ (hbars) by helping us to test our SDKs. Hedera is based in the USA, so for us to be allowed to do this under US law we need to verify your identity as a part of the account creation process.
+* We want to allow devs to earn __ℏ__ ([hbars](#a-hbar)) by helping us to test our SDKs. Hedera is based in the USA, so for us to be allowed to do this under US law we need to verify your identity as a part of the account creation process.
 
 A full explanation of the Portal, Hedera accounts, identity verification and many other topics can be found at [Hedera Help](https://help.hedera.com). New users should head for the [Getting Started](https://help.hedera.com/hc/en-us/categories/360000099938-Getting-Started) section.
 
 ### Hedera testnet access
 
-A Hedera testnet provides a test environment for testing your code without having to spend "real" mainnet __ℏ__ (hbars). Testnet hbars are akin to "monopoly money" and have no intrinsic value, but testing against testnets will help you **earn** real **mainnet ℏ (hbars)**. It is worth noting that the virtual infrastructure used to provide testnets is not intended for performance testing, as the specification of nodes is not in any way equivalent to that of mainnet nodes. Further information on this topic is included within the "Testnet Performance and Throttling" section further on in these instructions.
+A Hedera testnet provides a test environment for testing your code without having to spend "real" mainnet __ℏ__ ([hbars](#a-hbar)). Testnet hbars are akin to "monopoly money" and have no intrinsic value, but testing against testnets will help you **earn** real **mainnet ℏ ([hbars](#a-hbar))**. It is worth noting that the virtual infrastructure used to provide testnets is not intended for performance testing, as the specification of nodes is not in any way equivalent to that of mainnet nodes. Further information on this topic is included within the "Testnet Performance and Throttling" section further on in these instructions.
 
 * Once you have your Hedera account set up, you can request access to Hedera test networks by filling out the form [here](https://learn.hedera.com/HederaTestnetAccess).
 * Check for answers to your testnet-related questions in the *Testnet Activation* section on [this](https://help.hedera.com/hc/en-us/categories/360000099938-Getting-Started) page.
@@ -80,7 +106,7 @@ A Hedera testnet provides a test environment for testing your code without havin
 
 To clone the repo and all required dependencies, run the following command from a terminal window. Note that this command will create a files and folders from within your current folder.
 
-Remember that the software prerequisites described above must be installed before proceeding.
+Remember that the [software prerequisites][03-01-software] described above must be installed before proceeding.
 
 ```sh
 go get github.com/hashgraph/hedera-sdk-go
@@ -124,7 +150,7 @@ go run main.go
 
 ## Associating your public key with you Hedera tesnet account
 
-Once you have generated a public/private keypair as described above, you need to link the **public** key to your Hedera testnet account. To do this, return to the Hedera portal and ensure that you have the testnet selected in the drop-down at the top of the page.
+Once you have generated a public/private keypair as described [above][05-create-keypair], you need to link the **public** key to your Hedera testnet account. To do this, return to the Hedera portal and ensure that you have the testnet selected in the drop-down at the top of the page.
 
 You should see the box asking you to `Enter your Public Key`. Copy the long hex value of the **public** key and paste it into that textbox in the portal. Do make sure you that you select all of the characters. Click `Submit`.
 
@@ -210,7 +236,7 @@ At this point, you're ready to query your account balance. The `client.Account(m
 
 You can the output the balance using `fmt.Printf` and end the program by closing the braces for `func main`.
 
-For illustrative purposes, we're showing the balance in **_tinybars_** and **_hbars_**. The Hedera SDKs represent all quantities for transfers and fees as integers using _tinybars_. There are one hundred million (100,000,000) tinybars in one hbar.
+For illustrative purposes, we're showing the balance in **_[tinybars](#a-tinybar)_** and **_[hbars](#a-hbar)_**. The Hedera SDKs represent all quantities for transfers and fees as integers using _tinybars_. There are one hundred million (100,000,000) tinybars in one hbar.
 
 ```go
   myBalance, err := client.Account(myAccount).Balance().Get()
@@ -290,7 +316,7 @@ If you know the account ID of another account on your testnet – perhaps a frie
 >
 > Note that your balance will decrease slightly each time you execute your code. This is due to the small fees associated with each query or transaction on the Hedera platform. On a testnet, this is not all that important, but it's worth keeping on mind when using mainnet.
 
-### Next step: Transferring _hbars_ to a friend's account
+### Next step: Transferring _[hbars](#a-hbar)_ to a friend's account
 
 * A `transferAmount` variable can be used to make the next steps more readable. In this case, we'll transfer **10 ℏ** and output details of the intended transaction.
 
@@ -330,7 +356,7 @@ __4__. `Operator(myAccount).` specifies the account initiating the transaction a
 
 __5__. `Node(nodeAccount).` indicates the node to which this transaction and associated fee payments will be sent.
 
-__6__. `Memo("My first transfer of hbars! w00t!").` assigns a label to the transaction of up to 100 bytes. Use of this field is at the developr's discretion and does no0t affect the behaviour of the plaform.
+__6__. `Memo("My first transfer of hbars! w00t!").` assigns a label to the transaction of up to 100 bytes. Use of this field is at the developer's discretion and does not affect the behaviour of the plaform.
 
 __7__. `Sign(operatorSecret).` adds a signature for the **operator** account. This is required as fees will be deducted from this account.
 
@@ -338,7 +364,7 @@ __8__. `Sign(operatorSecret).` adds a signature for the account from which **_hb
 
 __9__. `Execute()` executes the transaction.
 
- If the `client.SetOperator()` function is used to set the default operator as illustrated above, lines __4__ and __7__ can be omitted. If the `client.SetNode()` function is used to set the default node as illustrated above, line __5__ can also be ommited.
+ If the `client.SetOperator()` function is used to set the default operator as illustrated above, lines __4__ and __7__ can be omitted. If the `client.SetNode()` function is used to set the default node as illustrated above, line __5__ can also be omitted.
 
 > #### Multi-party transfers
 >
@@ -449,11 +475,30 @@ Account 1235 balance = 50.00000 hbars
 
 Please reach out to us on the Hedera [discord channels](https://hedera.com/discord). We're fortunate to have an active community of over 5000 like-minded devs, who are passionate about our tech. The Hedera Developer Advocacy team also participates actively.
 
-## Contributing
+## Contributing to this Project
 
 We welcome participation from all developers! For instructions on how to contribute to this repo, please review the [Contributing Guide](CONTRIBUTING.md).
 
-## License
+## License Information
 
 Licensed under Apache License,
-Version 2.0 – see [LICENSE](LICENSE) in this repo or [apache.orglicenses/LICENSE-2.0](http://www.apache.org/licenses/LICENSE-2.0)
+Version 2.0 – see [LICENSE](LICENSE) in this repo or [apache.org/licenses/LICENSE-2.0](http://www.apache.org/licenses/LICENSE-2.0)
+
+[//]: # (Internal reference links)
+[01-dev-rewards]: #developer-rewards
+[02-arch-overview]: #architectural-overview
+[03-prerequisites]: #prerequisites
+[03-01-software]: #software
+[03-02-hedera-acct]: #hedera-account
+[03-03-hedera-testnet]: #hedera-testnet-access
+[04-installing]: #installing-the-hedera-sdk-for-go
+[05-create-keypair]: creating-a-publicprivate-keypair-for-testnet-use
+[06-assoc-key]: #associating-your-public-key-with-you-hedera-tesnet-account
+[07-first-hedera]: #your-first-hedera-application
+[07-01-check-balance]: #checking-your-account-balance
+[07-02-friend-balance]: #enhance-your-application-to-check-a-friends-account-balance
+[07-03-transfer-hbars]: #next-step-transferring-hbars-to-a-friends-account
+[08-other-res]: #other-resources
+[09-get-in-touch]: #getting-in-touch
+[10-contribute]: #contributing-to-this-project
+[11-license]: #license-information
