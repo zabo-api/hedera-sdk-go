@@ -34,7 +34,10 @@ func main() {
 
 	// load example file
 	data, err := ioutil.ReadFile("../files/Hedera.txt")
-
+	if err != nil {
+		fmt.Println("File read error", err)
+		return
+	}
 	//
 	// Send transaction to create a file
 	//
