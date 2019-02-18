@@ -40,15 +40,26 @@ func main() {
 
 	expiryTime := time.Now().AddDate(0, 0, 1) // add one day
 
+	client.SetNode(nodeAccountID)
+	client.SetOperator(operatorAccountID, func() hedera.SecretKey {
+		operatorSecret, err := hedera.SecretKeyFromString(os.Getenv("OPERATOR_SECRET"))
+		if err != nil {
+			panic(err)
+		}
+
+		return operatorSecret
+	})
+
 	response, err := client.CreateFile().
 		Key(public).
 		ExpiresAt(expiryTime).
 		Contents([]byte("Hedera Hashgraph is great")).
-		Operator(operatorAccountID).
-		Node(nodeAccountID).
+		// Operator(operatorAccountID).
+		// Node(nodeAccountID).
 		Memo("[test] hedera-sdk-go file-create").
+		GenerateRecord(true).
 		Sign(operatorSecret).
-		Sign(operatorSecret).
+		// Sign(operatorSecret).
 		Execute()
 
 	if err != nil {
@@ -62,9 +73,10 @@ func main() {
 	// Get receipt to prove we created it ok
 	//
 
-	fmt.Printf("wait for 2s...\n")
-	time.Sleep(2 * time.Second)
+	fmt.Printf("wait for 5s...\n")
+	time.Sleep(5 * time.Second)
 
+	fmt.Printf("getting receipt; transaction = %v\n", transactionID)
 	receipt, err := client.Transaction(*transactionID).Receipt().Get()
 	if err != nil {
 		panic(err)
@@ -75,4 +87,17 @@ func main() {
 	}
 
 	fmt.Printf("file = %v\n", *receipt.FileID)
+
+	fmt.Printf("wait for 5s...\n")
+	time.Sleep(5 * time.Second)
+
+	record, err := client.Transaction(*transactionID).Record().
+		Get()
+
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Printf("hash = %v\n", record)
+
 }

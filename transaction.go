@@ -31,6 +31,16 @@ func (tx transaction) Memo(memo string) transaction {
 	return tx
 }
 
+func (tx transaction) GenerateRecord(record bool) transaction {
+	if record {
+		C.hedera_transaction_set_generate_record(tx.inner, 1)
+	} else {
+		C.hedera_transaction_set_generate_record(tx.inner, 0)
+	}
+
+	return tx
+}
+
 func (tx transaction) Sign(key SecretKey) RawTransaction {
 	return RawTransaction{tx.inner}.Sign(key)
 }

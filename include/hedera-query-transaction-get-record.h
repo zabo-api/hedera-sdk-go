@@ -17,7 +17,7 @@ extern HederaQuery* hedera_query__transaction_get_record__new(
 
 extern HederaError hedera_query__transaction_get_record__get(
     HederaQuery*,
-    HederaTransactionRecord**);
+    HederaTransactionRecord*);
 
 #ifdef __cplusplus
 }

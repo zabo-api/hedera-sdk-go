@@ -134,3 +134,7 @@ type PartialTransactionMessage struct {
 func (m PartialTransactionMessage) Receipt() QueryTransactionGetReceipt {
 	return newQueryTransactionGetReceipt(m.client, m.transaction)
 }
+
+func (m PartialTransactionMessage) Record() QueryTransactionGetRecord {
+	return newQueryTransactionGetRecord(m.client, m.transaction)
+}
