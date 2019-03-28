@@ -53,7 +53,7 @@ func main() {
 	//
 
 	nodeAccountID := hedera.AccountID{Account: 3}
-	response, err := client.TransferCrypto().
+	transaction, err := client.TransferCrypto().
 		// Move 100 out of operator account
 		Transfer(operatorAccountID, -100).
 		// And place in our new account
@@ -69,8 +69,7 @@ func main() {
 		panic(err)
 	}
 
-	transactionID := response.ID
-	fmt.Printf("transferred; transaction = %v\n", transactionID)
+	fmt.Printf("transferred; transaction = %v\n", transaction.String())
 
 	//
 	// Get receipt to prove we sent ok
@@ -79,7 +78,7 @@ func main() {
 	fmt.Printf("wait for 2s...\n")
 	time.Sleep(2 * time.Second)
 
-	receipt, err := client.Transaction(*transactionID).Receipt().Get()
+	receipt, err := client.Transaction(transaction).Receipt().Get()
 	if err != nil {
 		panic(err)
 	}

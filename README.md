@@ -333,7 +333,7 @@ If you know the account ID of another account on your testnet – perhaps a frie
 * The next statement is a little more complex so each line is explained individually below the code.
 
 ```go
-  response, err := client.CryptoTransfer().
+  transaction, err := client.CryptoTransfer().
     Transfer(myAccount, -transferAmount).
     Transfer(friendAccount, transferAmount).
     Operator(myAccount).
@@ -349,7 +349,7 @@ If you know the account ID of another account on your testnet – perhaps a frie
 
 #### Explanation of the above code block by line number
 
-__1__. `response, err := client.CryptoTransfer().` creates a transaction to transfer **_hbars_** between accounts.
+__1__. `transaction, err := client.CryptoTransfer().` creates a transaction to transfer **_hbars_** between accounts.
 
 __2__. `Transfer(myAccount, -transferAmount).` sets up part of the transfer. In this case _from_ **your** account. Note that the "`-`" (minus sign) denotes that **_hbars_** will be **deducted** from this account.
 
@@ -375,13 +375,12 @@ __9__. `Execute()` executes the transaction.
 >
 > __Important__: the _sum of all amounts_ in `Transfer(...)` lines contained within in a `CryptoTransfer` _**must** add up to **zero**_.
 
-* The ID of the transaction itself can now be captured from the `response` object in the above statement. The `transactionID` is made up of the account ID and the transaction timestamp – right down to nanoseconds.
+* The `transaction` is made up of the account ID and the transaction timestamp – right down to nanoseconds, which uniquely identifies it.
 
 * It makes sense to wait a little longer (2 seconds) after sending the transaction, so that the Hedera network can reach consensus on the transaction.
 
 ```go
-  transactionID := response.ID
-  fmt.Printf("Transfer Sent. Transaction ID is %v\n", transactionID)
+  fmt.Printf("Transfer Sent. Transaction ID is %v\n", transaction.String())
 
   time.Sleep(2 * time.Second)
 ```
@@ -389,7 +388,7 @@ __9__. `Execute()` executes the transaction.
 * To confirm that the transaction succeeded a `receipt` can be requested. Although this is not a mandatory step, it does verify that this transaction successfully reached network consensus.
 
 ```go
-  receipt, err := client.Transaction(*transactionID).Receipt().Get()
+  receipt, err := client.Transaction(transaction).Receipt().Get()
   if err != nil {
     panic(err)
   }
@@ -403,7 +402,7 @@ __9__. `Execute()` executes the transaction.
   time.Sleep(1 * time.Second)
 ```
 
-* Finally, the balances of both accounts can be requeried to verify that the **10 ℏ** was indeed transferred from your account to that of your friend.
+* Finally, the balances of both accounts can be required to verify that the **10 ℏ** was indeed transferred from your account to that of your friend.
 
 ```go
   myBalance, err = client.Account(myAccount).Balance().Get()
