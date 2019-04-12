@@ -58,7 +58,7 @@ func (client Client) Close() {
 // Deprecated: Use Client.TransferCrypto() instead
 func (client Client) CryptoTransfer() TransactionCryptoTransfer {
 	oncer.Deprecate(0,
-		"github.com/hashgraph/hedera-sdk-go#Client.CryptoTransfer()",
+		"github.com/launchbadge/hedera-sdk-go#Client.CryptoTransfer()",
 		"Use Client.TransferCrypto() instead.")
 
 	return client.TransferCrypto()
@@ -67,7 +67,7 @@ func (client Client) CryptoTransfer() TransactionCryptoTransfer {
 // Deprecated: Use Client.Account(id).Balance() instead
 func (client Client) GetAccountBalance(id AccountID) QueryCryptoGetAccountBalance {
 	oncer.Deprecate(0,
-		"github.com/hashgraph/hedera-sdk-go#Client.GetAccountBalance(id)",
+		"github.com/launchbadge/hedera-sdk-go#Client.GetAccountBalance(id)",
 		"Use Client.Account(id).Balance() instead.")
 
 	return newQueryCryptoGetAccountBalance(client, id)
@@ -76,7 +76,7 @@ func (client Client) GetAccountBalance(id AccountID) QueryCryptoGetAccountBalanc
 // Deprecated: Use Client.Transaction(id).Receipt() instead
 func (client Client) GetTransactionReceipt(id *TransactionID) QueryTransactionGetReceipt {
 	oncer.Deprecate(0,
-		"github.com/hashgraph/hedera-sdk-go#Client.GetTransactionReceipt(id)",
+		"github.com/launchbadge/hedera-sdk-go#Client.GetTransactionReceipt(id)",
 		"Use Client.Transaction(id).Receipt() instead.")
 
 	return newQueryTransactionGetReceipt(client, *id)

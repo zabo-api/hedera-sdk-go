@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
- - `hedera.SecretKey.Public()` now uses the correct definition of the PublicKey structure [#25](https://github.com/hashgraph/hedera-sdk-go/issues/25)
+ - `hedera.SecretKey.Public()` now uses the correct definition of the PublicKey structure [#25](https://github.com/launchbadge/hedera-sdk-go/issues/25)
 
 ## 0.3.0 - 2019-01-07
 
@@ -29,7 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
- - Memory alignment in Windows 10 ([#11](https://github.com/hashgraph/hedera-sdk-go/issues/11))
+ - Memory alignment in Windows 10 ([#11](https://github.com/launchbadge/hedera-sdk-go/issues/11))
 
 ### Changed
 

@@ -1,7 +1,7 @@
-# Hedera SDK for Go
+https://github.com/QuestofIranon/hedera-sdk-go.git# Hedera SDK for Go
 
-[![GoDoc](https://godoc.org/github.com/hashgraph/hedera-sdk-go?status.svg)](https://godoc.org/github.com/hashgraph/hedera-sdk-go)
-[![](https://goreportcard.com/badge/github.com/hashgraph/hedera-sdk-go)](https://goreportcard.com/report/github.com/hashgraph/hedera-sdk-go)
+[![GoDoc](https://godoc.org/github.com/launchbadge/hedera-sdk-go?status.svg)](https://godoc.org/github.com/launchbadge/hedera-sdk-go)
+[![](https://goreportcard.com/badge/github.com/launchbadge/hedera-sdk-go)](https://goreportcard.com/report/github.com/launchbadge/hedera-sdk-go)
 
 This repo contains the Go SDK for interacting with the [Hedera](https://hedera.com) platform. Hedera is the _only_ **public** distributed ledger licensed to use the Hashgraph consensus algorithm for fast, fair and secure transactions. By using any of the Hedera SDKs, developers will be empowered to build an entirely new class of decentralized applications.
 
@@ -112,7 +112,7 @@ To clone the repo and all required dependencies, run the following command from 
 Remember that the [software prerequisites][03-01-software] described above must be installed before proceeding.
 
 ```sh
-go get github.com/hashgraph/hedera-sdk-go
+go get github.com/launchbadge/hedera-sdk-go
 ```
 
 ## Creating a public/private keypair for testnet use
@@ -124,7 +124,7 @@ package main
 
 import (
   "fmt"
-  "github.com/hashgraph/hedera-sdk-go"
+  "github.com/launchbadge/hedera-sdk-go"
 )
 
 func main() {
@@ -151,7 +151,7 @@ go run main.go
 >
 > Throughout these instructions you'll find the phrase "Run the following command from a terminal window." Feel free to use your IDE whenever you see this – if that's how you prefer to work. Terminal is used in this document to avoid ambiguity.
 
-## Associating your public key with you Hedera tesnet account
+## Associating your public key with your Hedera testnet account
 
 Once you have generated a public/private keypair as described [above][05-create-keypair], you need to link the **public** key to your Hedera testnet account. To do this, return to the Hedera portal and ensure that you have the testnet selected in the drop-down at the top of the page.
 
@@ -179,7 +179,7 @@ package main
 import (
   "fmt"
   //"time"
-  "github.com/hashgraph/hedera-sdk-go"
+  "github.com/launchbadge/hedera-sdk-go"
 )
 
 func main() {

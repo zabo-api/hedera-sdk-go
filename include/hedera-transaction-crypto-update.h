@@ -4,6 +4,8 @@
 #include "hedera-transaction.h"
 #include "hedera-claim.h"
 #include "hedera-id.h"
+#include "hedera-duration.h"
+#include "hedera-timestamp.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -24,7 +26,6 @@ extern void hedera_transaction__crypto_update__set_proxy_account(
     HederaAccountId proxy_account
 );
 
-
 extern void hedera_transaction__crypto_update__set_proxy_fraction(
     HederaTransaction*, 
     int32_t proxy_fraction
@@ -38,6 +39,16 @@ extern void hedera_transaction__crypto_update__set_send_record_threshold(
 extern void hedera_transaction__crypto_update__set_receive_record_threshold(
     HederaTransaction*, 
     uint64_t receive_record_threshold
+);
+
+extern void hedera_transaction__crypto_update__set_auto_renew_period(
+    HederaTransaction*, 
+    HederaDuration period
+);
+
+extern void hedera_transaction__crypto_update__set_expires_at(
+    HederaTransaction*, 
+    HederaTimestamp expiration_time
 );
 
 #ifdef __cplusplus

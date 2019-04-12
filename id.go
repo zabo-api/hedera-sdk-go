@@ -15,7 +15,7 @@ type AccountID struct {
 // Deprecated: Use AccountID{realm, shard, account} instead.
 func NewAccountID(realm, shard, account int64) AccountID {
 	oncer.Deprecate(0,
-		"github.com/hashgraph/hedera-sdk-go#NewAccountID",
+		"github.com/launchbadge/hedera-sdk-go#NewAccountID",
 		"Use AccountID instead.")
 
 	return AccountID{Realm: realm, Shard: shard, Account: account}
