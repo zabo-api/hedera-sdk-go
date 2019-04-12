@@ -92,11 +92,11 @@ All Pull Requests must be approved by at least one member of the SDK team before
 
 * Join us in our [Discord][discord] channel; there you can engage with the Hedera team and other developers and enthusiasts.
 
-[license]: https://github.com/hashgraph/hedera-sdk-go/blob/master/LICENSE
+[license]: https://github.com/launchbadge/hedera-sdk-go/blob/master/LICENSE
 [mwe]: https://en.wikipedia.org/wiki/Minimal_Working_Example
 [markdown]: https://guides.github.com/features/mastering-markdown/
-[issues]: https://github.com/hashgraph/hedera-sdk-go/issues
-[pull-requests]: https://github.com/hashgraph/hedera-sdk-go/pulls
-[label-bug]: https://github.com/hashgraph/hedera-sdk-go/labels/bug
-[label-enhancement]: https://github.com/hashgraph/hedera-sdk-go/labels/enhancement
+[issues]: https://github.com/launchbadge/hedera-sdk-go/issues
+[pull-requests]: https://github.com/launchbadge/hedera-sdk-go/pulls
+[label-bug]: https://github.com/launchbadge/hedera-sdk-go/labels/bug
+[label-enhancement]: https://github.com/launchbadge/hedera-sdk-go/labels/enhancement
 [discord]: https://hedera.com/discord

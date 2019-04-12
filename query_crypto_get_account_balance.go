@@ -17,7 +17,7 @@ func newQueryCryptoGetAccountBalance(client Client, id AccountID) QueryCryptoGet
 // Deprecated: Use Query.Get() instead
 func (query QueryCryptoGetAccountBalance) Answer() (uint64, error) {
 	oncer.Deprecate(0,
-		"github.com/hashgraph/hedera-sdk-go#Query.Answer()",
+		"github.com/launchbadge/hedera-sdk-go#Query.Answer()",
 		"Use Query.Get() instead.")
 
 	return query.Get()

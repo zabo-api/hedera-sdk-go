@@ -17,7 +17,7 @@ func newQueryTransactionGetReceipt(client Client, id TransactionID) QueryTransac
 // Deprecated: Use Query.Get() instead
 func (query QueryTransactionGetReceipt) Answer() (TransactionReceipt, error) {
 	oncer.Deprecate(0,
-		"github.com/hashgraph/hedera-sdk-go#Query.Answer()",
+		"github.com/launchbadge/hedera-sdk-go#Query.Answer()",
 		"Use Query.Get() instead.")
 
 	return query.Get()

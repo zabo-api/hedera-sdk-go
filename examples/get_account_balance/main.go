@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/hashgraph/hedera-sdk-go"
+	"github.com/launchbadge/hedera-sdk-go"
 	"os"
 )
 
