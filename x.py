@@ -72,18 +72,27 @@ def build(release=False):
                    silent=True,
                    cwd="vendor/hedera-sdk-c")
 
+            if 'musl' in target:
+                cc = 'musl-gcc'
+            else:
+                cc = f"{prefix[target]}gcc"
+
             profile = "--release" if release else ''
             sh(f"cargo build --target {target} {profile}",
                cwd="vendor/hedera-sdk-c",
                env={
-                   "CC": f"{prefix[target]}gcc",
-                   "CARGO_TARGET_X86_64_UNKNOWN_LINUX_MUSL_LINKER": f"{prefix[target]}gcc",
-                   "CARGO_TARGET_X86_64_PC_WINDOWS_GNU_LINKER": f"{prefix[target]}gcc",
+                   "CC": cc,
+                   "CARGO_TARGET_X86_64_UNKNOWN_LINUX_MUSL_LINKER": cc,
+                   "CARGO_TARGET_X86_64_PC_WINDOWS_GNU_LINKER": cc,
                })
 
             if target.endswith("-apple-darwin"):
                 sh(f"strip -Sx {artifact[target]}",
                    cwd=f"vendor/hedera-sdk-c/target/{target}/release", silent=True)
+
+            elif target.endswith("-musl"):
+                sh(f"strip --strip-unneeded -d -x {artifact[target]}",
+                   cwd=f"vendor/hedera-sdk-c/target/{target}/release")
 
             else:
                 sh(f"{prefix[target]}strip --strip-unneeded -d -x {artifact[target]}",
