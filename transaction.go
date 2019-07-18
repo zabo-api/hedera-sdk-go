@@ -32,7 +32,7 @@ func (tx transaction) Memo(memo string) transaction {
 }
 
 func (tx transaction) Fee(fee uint64) transaction {
-	C.hedera_transaction_set_fee(tx.inner, fee)
+	C.hedera_transaction_set_fee(tx.inner, C.ulong(fee))
 	return tx
 }
 
