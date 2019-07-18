@@ -31,6 +31,11 @@ func (tx transaction) Memo(memo string) transaction {
 	return tx
 }
 
+func (tx transaction) Fee(fee uint64) transaction {
+	C.hedera_transaction_set_fee(tx.inner, fee)
+	return tx
+}
+
 func (tx transaction) Sign(key SecretKey) RawTransaction {
 	return RawTransaction{tx.inner}.Sign(key)
 }
