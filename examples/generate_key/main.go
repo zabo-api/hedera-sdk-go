@@ -2,7 +2,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/launchbadge/hedera-sdk-go"
+
+	"github.com/zabo-api/hedera-sdk-go"
 )
 
 func main() {
